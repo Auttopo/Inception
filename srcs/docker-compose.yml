@@ -1,0 +1,66 @@
+
+services:
+
+  nginx:
+    build:
+      context: .
+      dockerfile: requirements/nginx/Dockerfile
+    volumes:
+      - wp-data:/home/abenabde/data
+    ports:
+      - "443:443"
+      - "9000"
+    networks:
+      - bridge_1
+    tty: true
+    restart: unless-stopped
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: requirements/wordpress/Dockerfile
+    hostname: www.abenabde.42.fr
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - wp-data:/home/abenabde/data
+    ports:
+      - "9000"
+      - "3306"
+    networks:
+      - bridge_1
+      - bridge_2
+    tty: true
+    restart: unless-stopped
+
+  mariadb:
+    build:
+      context: .
+      dockerfile: requirements/mariadb/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/home/abenabde/data
+    ports:
+      - "3306"
+    networks:
+      - bridge_2
+    tty: true
+    restart: unless-stopped
+  
+volumes:
+  wp-data:
+
+  db-data:
+
+networks:
+  bridge_1:
+    driver: bridge
+  bridge_2:
+    driver: bridge
