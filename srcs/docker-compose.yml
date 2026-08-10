@@ -21,15 +21,12 @@ services:
       dockerfile: requirements/wordpress/Dockerfile
     hostname: www.abenabde.42.fr
     environment:
-      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_HOST: mariadb:3306
       WORDPRESS_DB_NAME: ${DB_NAME}
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - wp-data:/home/abenabde/data
-    ports:
-      - "9000"
-      - "3306"
     networks:
       - bridge_1
       - bridge_2
@@ -47,8 +44,6 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db-data:/home/abenabde/data
-    ports:
-      - "3306"
     networks:
       - bridge_2
     tty: true
