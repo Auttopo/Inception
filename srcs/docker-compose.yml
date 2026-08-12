@@ -19,12 +19,11 @@ services:
     build:
       context: .
       dockerfile: requirements/wordpress/Dockerfile
-    hostname: www.abenabde.42.fr
     environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_NAME: ${DB_NAME}
-      WORDPRESS_DB_USER: ${DB_USER}
-      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WP_DB_NAME: ${WP_DB_NAME}
+      WP_DB_USER: ${WP_DB_USER}
+      WP_DB_PASSWORD: ${WP_DB_PASSWORD}
+    hostname: www.abenabde.42.fr
     volumes:
       - wp-data:/home/abenabde/data
     networks:
@@ -38,10 +37,10 @@ services:
       context: .
       dockerfile: requirements/mariadb/Dockerfile
     environment:
+      MYSQL_DATABASE: ${WP_DB_NAME}
+      MYSQL_USER: ${WP_DB_USER}
+      MYSQL_PASSWORD: ${WP_DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db-data:/home/abenabde/data
     networks:

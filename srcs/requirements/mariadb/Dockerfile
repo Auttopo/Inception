@@ -1,21 +1,27 @@
 FROM debian:12.15
 WORKDIR /app/mariadb
 LABEL description="MariaDB Server"
-EXPOSE 3306
 
 RUN apt update
-# RUN apt install -y wget lsb-release gnupg
-# RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.36-1_all.deb
-# RUN DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.36-1_all.deb
-# RUN apt update
-RUN apt install -y mariadb-server galera-4
+RUN apt install -y mariadb-server
 
-RUN service mariadb start
+RUN sed -i "s/^bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
+RUN sed -i "s|^datadir.*|datadir = /home/abenabde/data|" /etc/mysql/mariadb.conf.d/50-server.cnf
 
-ENTRYPOINT service mariadb start &&  mariadb-secure-installation && sleep infinity
+RUN sed -i "s|/var/lib/mysql|/home/abenabde/data|g" /etc/apparmor.d/usr.sbin.mysqld 2>/dev/null || true
 
-
-#HEALTHCHECK --start-period=5m \
-#	CMD mariadb -e 'SELECT @@datadir;' || exit 1
-
-
+ENTRYPOINT sh -c ' \
+    chown -R mysql:mysql /home/abenabde/data; \
+    if [ ! -d /home/abenabde/data/mysql ]; then \
+        mysql_install_db --user=mysql --datadir=/home/abenabde/data ; \
+        mysqld_safe --datadir=/home/abenabde/data --skip-networking & \
+        until mysqladmin ping 2>/dev/null; do sleep 1; done; \
+        mysql -u root -e " \
+            ALTER USER \"root\"@\"localhost\" IDENTIFIED BY \"$MYSQL_ROOT_PASSWORD\"; \
+            CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\`; \
+            CREATE USER IF NOT EXISTS \"$MYSQL_USER\"@\"%\" IDENTIFIED BY \"$MYSQL_PASSWORD\"; \
+            GRANT ALL PRIVILEGES ON \`$MYSQL_DATABASE\`.* TO \"$MYSQL_USER\"@\"%\"; \
+            FLUSH PRIVILEGES;"; \
+        mysqladmin -u root -p"$MYSQL_ROOT_PASSWORD" shutdown; \
+    fi; \
+    exec mysqld_safe --datadir=/home/abenabde/data'
