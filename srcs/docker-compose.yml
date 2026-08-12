@@ -12,7 +12,6 @@ services:
       - "9000"
     networks:
       - bridge_1
-    tty: true
     restart: unless-stopped
 
   wordpress:
@@ -29,7 +28,6 @@ services:
     networks:
       - bridge_1
       - bridge_2
-    tty: true
     restart: unless-stopped
 
   mariadb:
@@ -45,13 +43,22 @@ services:
       - db-data:/home/abenabde/data
     networks:
       - bridge_2
-    tty: true
     restart: unless-stopped
   
 volumes:
   wp-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/abenabde/data/wp_data
 
   db-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/abenabde/data/db_data
 
 networks:
   bridge_1:

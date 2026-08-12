@@ -21,5 +21,6 @@ if [ ! -f /etc/wordpress/config-www.abenabde.42.fr.php ]; then \
 	cp /etc/wordpress/config-www.abenabde.42.fr.php /etc/wordpress/config-abenabde.42.fr.php; \
 	cp -rn /usr/share/wordpress/* /home/abenabde/data/; \
 fi; \
+systemd-tmpfiles --remove --create /usr/lib/tmpfiles.d/php8.2-fpm.conf; \
 exec /usr/sbin/php-fpm8.2 -F; \
 '
