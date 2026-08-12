@@ -33,4 +33,4 @@ server {\n\
 
 RUN nginx -t
 
-ENTRYPOINT service nginx start && sleep infinity
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
