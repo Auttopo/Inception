@@ -3,8 +3,8 @@ services:
 
   nginx:
     build:
-      context: .
-      dockerfile: requirements/nginx/Dockerfile
+      context: requirements/nginx
+      dockerfile: Dockerfile
     volumes:
       - wp-data:/home/abenabde/data
     ports:
@@ -16,8 +16,8 @@ services:
 
   wordpress:
     build:
-      context: .
-      dockerfile: requirements/wordpress/Dockerfile
+      context: requirements/wordpress
+      dockerfile: Dockerfile
     environment:
       WP_DB_NAME: ${WP_DB_NAME}
       WP_DB_USER: ${WP_DB_USER}
@@ -32,8 +32,8 @@ services:
 
   mariadb:
     build:
-      context: .
-      dockerfile: requirements/mariadb/Dockerfile
+      context: requirements/mariadb
+      dockerfile: Dockerfile
     environment:
       MYSQL_DATABASE: ${WP_DB_NAME}
       MYSQL_USER: ${WP_DB_USER}
