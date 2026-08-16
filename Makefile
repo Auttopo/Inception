@@ -16,7 +16,12 @@ install:
 	echo -n "WP_DB_PASSWORD=" >> srcs/.env ;\
 	openssl rand -hex 40 >> srcs/.env ;\
 	echo -n "DB_ROOT_PASSWORD=" >> srcs/.env ;\
-	openssl rand -hex 40 >> srcs/.env
+	openssl rand -hex 40 >> srcs/.env ;\
+\
+	echo -n "FTP_USER=" >> srcs/.env ;\
+	echo "user" >> srcs/.env ;\
+	echo -n "FTP_PASSWORD=" >> srcs/.env ;\
+	openssl rand -hex 40 >> srcs/.env ;
 
 stop:
 	cd srcs ;\

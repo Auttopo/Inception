@@ -28,6 +28,7 @@ services:
     networks:
       - bridge_1
       - bridge_2
+      - bridge_3
     restart: unless-stopped
 
   mariadb:
@@ -43,6 +44,30 @@ services:
       - db-data:/home/abenabde/data
     networks:
       - bridge_2
+    restart: unless-stopped
+
+  redis:
+    build:
+      context: requirements/redis
+      dockerfile: Dockerfile
+    networks:
+      - bridge_3
+    restart: unless-stopped
+
+  ftp:
+    build:
+      context: requirements/ftp
+      dockerfile: Dockerfile
+    environment:
+      FTP_USER: ${FTP_USER}
+      FTP_PASSWORD: ${FTP_PASSWORD}
+    volumes:
+      - wp-data:/home/abenabde/data
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    networks:
+      - bridge_1
     restart: unless-stopped
   
 volumes:
@@ -64,4 +89,6 @@ networks:
   bridge_1:
     driver: bridge
   bridge_2:
+    driver: bridge
+  bridge_3:
     driver: bridge
