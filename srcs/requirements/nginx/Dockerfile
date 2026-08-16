@@ -28,9 +28,14 @@ server {\n\
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;\n\
 		include fastcgi_params;\n\
 	}\n\
+\n\
+	location /adminer {\n\
+		proxy_pass http://adminer:8080;\n\
+		proxy_set_header Host $host;\n\
+		proxy_set_header X-Real-IP $remote_addr;\n\
+	}\n\
 }\n\
 ' >> /etc/nginx/conf.d/wordpressconfig.conf
 
-RUN nginx -t
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["sh", "-c", "nginx -t && nginx -g 'daemon off;'"]

@@ -13,7 +13,7 @@ This directory houses the individual container definitions for each service requ
 | **MariaDB** | [`mariadb/`](file:///home/user/Documents/Inception/srcs/requirements/mariadb) | `debian:12.15` | MariaDB Server | Port 3306 (MySQL) | Relational SQL Storage |
 | **Redis** | [`redis/`](file:///home/user/Documents/Inception/srcs/requirements/redis) *(Phase 1)* | `debian:12.15` | Redis Server | Port 6379 (Redis) | In-Memory Object Cache for WP |
 | **FTP** | [`ftp/`](file:///home/user/Documents/Inception/srcs/requirements/ftp) *(Phase 2)* | `debian:12.15` | vsftpd | Ports 21, 30000-30009 | FTP File Management for `wp-data` |
-| **Adminer** | `adminer/` *(Phase 3)* | `debian:12.15` | Single-file PHP Adminer, PHP CLI Server | Port 8080 (HTTP) | Web Database GUI for MariaDB |
+| **Adminer** | [`adminer/`](file:///home/user/Documents/Inception/srcs/requirements/adminer) *(Phase 3)* | `debian:12.15` | Adminer, PHP CLI, PHP MySQL | Port 8080 (HTTP) | Web Database GUI for MariaDB |
 
 ---
 
@@ -27,6 +27,6 @@ This directory houses the individual container definitions for each service requ
    - MariaDB: `mysqld_safe --datadir=/home/abenabde/data`
    - Redis: `redis-server --protected-mode no --bind 0.0.0.0`
    - FTP: `vsftpd /etc/vsftpd.conf`
-   - Adminer: `php -S 0.0.0.0:8080 -t /var/www/html`
+   - Adminer: `php -S 0.0.0.0:8080 -t /usr/share/adminer/adminer`
 4. **Automated Initialization**: Services perform self-initialization on first run if data directories or configuration files are absent.
 5. **Data Isolation & Volume Sharing**: Application data and database files are persisted to volume mounts pointing to `/home/abenabde/data/`.

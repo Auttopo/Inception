@@ -20,14 +20,15 @@ This directory contains the central Docker Compose configuration and environment
 ### 1. `nginx`
 - **Build Context**: `requirements/nginx`
 - **Exposed Ports**: `443` (HTTPS)
-- **Networks**: `bridge_1` (Public facing front-end bridge)
+- **Networks**: `net_front`, `net_nginx_adminer`
 - **Volume Mounts**: `wp-data` mapped to `/home/abenabde/data` to read WordPress PHP static files.
+- **Routing**: Proxies `/adminer` requests to `adminer:8080` over `net_nginx_adminer`.
 - **Restart Policy**: `unless-stopped`
 
 ### 2. `wordpress`
 - **Build Context**: `requirements/wordpress`
 - **Hostname**: `www.abenabde.42.fr`
-- **Networks**: `bridge_1` and `bridge_2` (Acts as the application bridge between Nginx web server and MariaDB database)
+- **Networks**: `net_front`, `net_wp_db`, `net_wp_cache`
 - **Environment Variables**:
   - `WP_DB_NAME`: Database name (`${WP_DB_NAME}`)
   - `WP_DB_USER`: Database user (`${WP_DB_USER}`)
@@ -46,29 +47,65 @@ This directory contains the central Docker Compose configuration and environment
 - **Volume Mounts**: `db-data` mapped to `/home/abenabde/data` for persistent database storage.
 - **Restart Policy**: `unless-stopped`
 
+### 4. `redis`
+- **Build Context**: `requirements/redis`
+- **Networks**: `net_wp_cache` (Dedicated caching network shared with WordPress)
+- **Restart Policy**: `unless-stopped`
+
+### 5. `ftp`
+- **Build Context**: `requirements/ftp`
+- **Exposed Ports**: `21` (Control), `30000-30009` (Passive data)
+- **Networks**: `net_front`
+- **Environment Variables**:
+  - `FTP_USER`: FTP user (`${FTP_USER}`)
+  - `FTP_PASSWORD`: FTP password (`${FTP_PASSWORD}`)
+- **Volume Mounts**: `wp-data` mapped to `/home/abenabde/data` for direct WordPress file access.
+- **Restart Policy**: `unless-stopped`
+
+### 6. `adminer`
+- **Build Context**: `requirements/adminer`
+- **Networks**: `net_nginx_adminer` (receives proxied requests from Nginx), `net_adminer_db` (connects to MariaDB)
+- **Access**: `https://abenabde.42.fr/adminer` — routed by Nginx, no direct host port exposure.
+- **Restart Policy**: `unless-stopped`
+
 ---
 
 ## 🌐 Network Topology
 
 ```
-+-----------------------------------------------------------------------------+
-|                                    HOST                                     |
-|                                                                             |
-|   Port 443                                                                  |
-|      │                                                                      |
-|      ▼                                                                      |
-|  +--------------------+        +--------------------+                       |
-|  |       nginx        |        |     wordpress      |                       |
-|  | (bridge_1 network) | <----> | (bridge_1 & 2)     |                       |
-|  +--------------------+        +--------------------+                       |
-|                                          ▲                                  |
-|                                          │ (bridge_2 network only)          |
-|                                          ▼                                  |
-|                                +--------------------+                       |
-|                                |      mariadb       |                       |
-|                                | (bridge_2 network) |                       |
-|                                +--------------------+                       |
-+-----------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------+
+|                                         HOST                                               |
+|                                                                                            |
+|      Port 443 (HTTPS)                           Port 21 / 30000-30009 (FTP)               |
+|           │                                                │                               |
+|           ▼                                                ▼                               |
+|   +--------------------+    net_front     +--------------------+                          |
+|   |       nginx        |<───────────────> |        ftp         |                          |
+|   |   (net_front,      |                  |    (net_front)     |                          |
+|   |  net_nginx_adminer)|                  +--------------------+                          |
+|   +--------------------+                              │ (shared wp-data volume)            |
+|       │            │                                  ▼                                    |
+|       │(net_front) │(net_nginx_adminer)   +--------------------+                          |
+|       ▼            ▼                      |     wordpress      |                          |
+|  +----------+  +----------+               | (net_front,        |                          |
+|  |wordpress |  | adminer  |               |  net_wp_db,        |                          |
+|  |(net_front|  |(net_nginx |               |  net_wp_cache)     |                          |
+|  | net_wp_db|  | _adminer, |               +--------------------+                          |
+|  | net_wp_  |  | net_admin |                  │               │                            |
+|  | cache)   |  | er_db)   |                   │(net_wp_cache) │(net_wp_db)                 |
+|  +----------+  +----------+                   ▼               ▼                            |
+|       │              │                  +--------+      +-----------+                      |
+|       │(net_wp_db)   │(net_adminer_db)  | redis  |      |  mariadb  |                      |
+|       ▼              └─────────────────>|(net_wp |      |(net_wp_db,|                      |
+|  +----------+                           | cache) |      |net_adminer|                      |
+|  | mariadb  |<──────────────────────────+--------+      |_db)       |                      |
+|  |(net_wp_db|                                           +-----------+                      |
+|  | net_adm  |                                                                              |
+|  | iner_db) |                                                                              |
+|  +----------+                                                                              |
++--------------------------------------------------------------------------------------------+
+
+Access path: https://abenabde.42.fr/adminer → nginx → (net_nginx_adminer) → adminer → (net_adminer_db) → mariadb
 ```
 
 ---

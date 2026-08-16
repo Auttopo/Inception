@@ -32,7 +32,12 @@ Custom configuration is appended to `/etc/nginx/conf.d/wordpressconfig.conf`:
 - **Server Name**: `www.abenabde.42.fr abenabde.42.fr`.
 - **Document Root**: `/home/abenabde/data` (shared via `wp-data` volume).
 - **FastCGI Proxying**: PHP requests (`~ \.php$`) are proxied to `wordpress:9000` via FastCGI protocol.
+- **Adminer Proxying**: Requests to `/adminer` are proxied to `adminer:8080` over `net_nginx_adminer` network.
 
-### 3. Build & Runtime Execution
+### 3. Networks
+- `net_front`: Communication with WordPress (FastCGI) and FTP (shared volume).
+- `net_nginx_adminer`: Isolated network dedicated to proxying requests to the Adminer container.
+
+### 4. Build & Runtime Execution
 - Validates configuration at build time using `nginx -t`.
 - Starts Nginx in the foreground as the PID 1 container entrypoint: `nginx -g 'daemon off;'`.

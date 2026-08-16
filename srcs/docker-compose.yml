@@ -11,7 +11,8 @@ services:
       - "443:443"
       - "9000"
     networks:
-      - bridge_1
+      - net_front
+      - net_nginx_adminer
     restart: unless-stopped
 
   wordpress:
@@ -26,9 +27,9 @@ services:
     volumes:
       - wp-data:/home/abenabde/data
     networks:
-      - bridge_1
-      - bridge_2
-      - bridge_3
+      - net_front
+      - net_wp_db
+      - net_wp_cache
     restart: unless-stopped
 
   mariadb:
@@ -43,7 +44,8 @@ services:
     volumes:
       - db-data:/home/abenabde/data
     networks:
-      - bridge_2
+      - net_wp_db
+      - net_adminer_db
     restart: unless-stopped
 
   redis:
@@ -51,7 +53,7 @@ services:
       context: requirements/redis
       dockerfile: Dockerfile
     networks:
-      - bridge_3
+      - net_wp_cache
     restart: unless-stopped
 
   ftp:
@@ -67,9 +69,18 @@ services:
       - "21:21"
       - "30000-30009:30000-30009"
     networks:
-      - bridge_1
+      - net_front
     restart: unless-stopped
-  
+
+  adminer:
+    build:
+      context: requirements/adminer
+      dockerfile: Dockerfile
+    networks:
+      - net_nginx_adminer
+      - net_adminer_db
+    restart: unless-stopped
+
 volumes:
   wp-data:
     driver: local
@@ -86,9 +97,13 @@ volumes:
       device: /home/abenabde/data/db_data
 
 networks:
-  bridge_1:
+  net_front:
     driver: bridge
-  bridge_2:
+  net_wp_db:
     driver: bridge
-  bridge_3:
+  net_wp_cache:
+    driver: bridge
+  net_nginx_adminer:
+    driver: bridge
+  net_adminer_db:
     driver: bridge

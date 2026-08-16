@@ -19,7 +19,7 @@ install:
 	openssl rand -hex 40 >> srcs/.env ;\
 \
 	echo -n "FTP_USER=" >> srcs/.env ;\
-	echo "user" >> srcs/.env ;\
+	echo "ftpuser" >> srcs/.env ;\
 	echo -n "FTP_PASSWORD=" >> srcs/.env ;\
 	openssl rand -hex 40 >> srcs/.env ;
 

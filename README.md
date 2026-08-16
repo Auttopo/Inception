@@ -14,8 +14,8 @@ The infrastructure currently runs three core services and is being expanded with
 | **WordPress** | Active | `debian:12.15` | PHP 8.2 Web Application | `bridge_1`, `bridge_2`, `bridge_3` |
 | **MariaDB** | Active | `debian:12.15` | Relational Database | `bridge_2` |
 | **Redis Cache** | Active (Phase 1) | `debian:12.15` | In-memory Object Cache for WordPress | `bridge_3` |
-| **FTP Server** | **Planned (Phase 2)** | `debian:12.15` | File transfer to shared WP/Nginx volume | `bridge_1` |
-| **Adminer** | **Planned (Phase 3)** | `debian:12.15` | Database Management Web Interface | `bridge_2` |
+| **FTP Server** | Active (Phase 2) | `debian:12.15` | File transfer to shared WP/Nginx volume | `bridge_1` |
+| **Adminer** | Testing (Phase 3) | `debian:12.15` | Database Management Web Interface | `bridge_2` |
 
 ---
 
@@ -88,9 +88,8 @@ We have established a **4-Phase Implementation Roadmap** based on service depend
 - **Rationale**: Web GUI management tool for MariaDB. Relies on the database container being healthy on `bridge_2`. Low-to-medium complexity.
 - **Base Image Rule**: `debian:12.15`
 - **Minimal Setup Strategy**:
-  - Install `php-cli` and `php-mysqli` minimal packages along with `curl`.
-  - Download single standalone script `adminer.php` directly from official source into `/var/www/html`.
-  - Serve using PHP built-in lightweight web server: `php -S 0.0.0.0:8080 -t /var/www/html`.
+  - Install `adminer`, `php-cli`, and `php-mysql` packages directly via official Debian APT.
+  - Serve using PHP built-in lightweight web server: `php -S 0.0.0.0:8080 -t /usr/share/adminer/adminer`.
   - No heavyweight Nginx or Apache dependency required inside Adminer container.
 
 ### 📋 Phase 4: Integration & WordPress Configuration
@@ -173,11 +172,8 @@ We have established a **4-Phase Implementation Roadmap** based on service depend
 - **Minimal Dockerfile**:
   ```dockerfile
   FROM debian:12.15
-  RUN apt update && apt install -y php-cli php-mysqli curl && rm -rf /var/lib/apt/lists/*
-  WORKDIR /var/www/html
-  RUN curl -sL https://www.adminer.org/latest.php -o index.php
-  EXPOSE 8080
-  CMD ["php", "-S", "0.0.0.0:8080", "-t", "/var/www/html"]
+  RUN apt update && apt install -y adminer php-cli php-mysql && rm -rf /var/lib/apt/lists/*
+  CMD ["php", "-S", "0.0.0.0:8080", "-t", "/usr/share/adminer/adminer"]
   ```
 - **How Connection Works**: Users navigate to `http://localhost:8080` (or `http://abenabde.42.fr:8080`). In the Adminer login interface, entering server name `mariadb`, user `wordpressuser`, and password connects directly to MariaDB over `bridge_2`.
 

@@ -21,8 +21,10 @@ This directory contains the build configuration for the vsftpd FTP server contai
 - Enables local authentication & write capabilities (`local_enable=YES`, `write_enable=YES`).
 - Restricts root directory to `/home/abenabde/data` (`local_root=/home/abenabde/data`).
 - Configures passive port range (`30000-30009`).
+- Disables seccomp sandboxing for container compatibility (`seccomp_sandbox=NO`).
 
-### 2. Entrypoint Script (`entrypoint.sh`)
+### 2. Runtime Lifecycle
+- Creates `/var/run/vsftpd/empty` (required secure chroot directory for vsftpd privilege separation).
 - Creates local FTP user `$FTP_USER` with password `$FTP_PASSWORD` if missing.
 - Sets ownership of `/home/abenabde/data` to `$FTP_USER`.
 - Launches `/usr/sbin/vsftpd /etc/vsftpd.conf` in the foreground.
