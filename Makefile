@@ -9,8 +9,10 @@ run:
 install:
 	sudo ./docker_install.sh ;\
 	sudo echo "127.0.0.1 abenabde.42.fr www.abenabde.42.fr" >> /etc/hosts ;\
+	sudo echo "127.0.0.1 abenabde.pizza.fr www.abenabde.pizza.fr" >> /etc/hosts ;\
 	sudo mkdir -p /home/abenabde/data/wp_data ;\
 	sudo mkdir -p /home/abenabde/data/db_data ;\
+	sudo mkdir -p /home/abenabde/data/static_website ;\
 \
 	echo "WP_DB_NAME=wordpressnetwork\nWP_DB_USER=wordpressuser" > srcs/.env ;\
 	echo -n "WP_DB_PASSWORD=" >> srcs/.env ;\

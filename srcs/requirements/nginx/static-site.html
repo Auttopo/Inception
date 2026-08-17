@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍕 The Ultimate Homemade Pizza — Extremely Detailed Recipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --char:#1B1512;
+  --crust:#241B15;
+  --crust2:#2E2118;
+  --flour:#F3E8D8;
+  --tan:#C4AE90;
+  --ember:#E8542E;
+  --gold:#E3A94B;
+  --basil:#8AA968;
+  --ink:#241C17;
+  --line:rgba(243,232,216,.14);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse at 20% -10%, rgba(232,84,46,.10), transparent 45%),
+    radial-gradient(ellipse at 90% 10%, rgba(227,169,75,.08), transparent 40%),
+    var(--char);
+  color:var(--flour);
+  font-family:'Source Serif 4', Georgia, serif;
+  line-height:1.55;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image: radial-gradient(rgba(243,232,216,.035) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity:.5;
+}
+h1,h2,h3,.chip,.step-num,.eyebrow{font-family:'Big Shoulders Display', sans-serif; letter-spacing:.02em;}
+a{color:var(--gold);}
+
+/* HERO */
+.hero{
+  position:relative; min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  padding:100px 20px 60px; overflow:hidden;
+}
+.glow{
+  position:absolute; width:900px; height:900px; border-radius:50%;
+  background:radial-gradient(circle, rgba(232,84,46,.35), rgba(232,84,46,.08) 40%, transparent 70%);
+  filter:blur(10px);
+  animation:breathe 6s ease-in-out infinite;
+  z-index:0;
+}
+@keyframes breathe{
+  0%,100%{transform:scale(1); opacity:.8;}
+  50%{transform:scale(1.12); opacity:1;}
+}
+.ring{
+  position:relative; width:280px; height:280px; margin:0 auto 30px; z-index:1;
+}
+.ring-center{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+}
+.ring-icon{
+  position:absolute; top:50%; left:50%; width:54px; height:54px;
+  transform: rotate(var(--angle)) translate(120px) rotate(calc(-1 * var(--angle)));
+  margin:-27px;
+  animation: spin 40s linear infinite;
+  transform-origin: 27px 27px;
+}
+.ring{animation: spinwrap 40s linear infinite;}
+@keyframes spinwrap{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+.ring-icon > svg{ display:block; filter:drop-shadow(0 2px 6px rgba(0,0,0,.4)); animation: counterspin 40s linear infinite; }
+@keyframes counterspin{ from{transform:rotate(0deg);} to{transform:rotate(-360deg);} }
+
+.eyebrow-top{
+  z-index:1; font-family:'IBM Plex Mono',monospace; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--gold); font-size:12px; margin-bottom:18px;
+}
+h1.title{
+  z-index:1; font-size:clamp(48px,9vw,116px); font-weight:900; text-transform:uppercase;
+  margin:0; line-height:.92; color:var(--flour);
+  text-shadow:0 0 40px rgba(232,84,46,.25);
+}
+h1.title em{ font-style:normal; color:var(--ember); }
+.hero-sub{
+  z-index:1; max-width:640px; margin:22px auto 0; color:var(--tan); font-size:17px;
+}
+.hero-meta{
+  z-index:1; display:flex; gap:28px; flex-wrap:wrap; justify-content:center; margin-top:34px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--tan); text-transform:uppercase; letter-spacing:.08em;
+}
+.hero-meta b{color:var(--flour); display:block; font-size:20px; font-family:'Big Shoulders Display',sans-serif; letter-spacing:0;}
+.scroll-cue{ z-index:1; margin-top:56px; color:var(--tan); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.7;}
+
+/* NAV */
+.nav{
+  position:sticky; top:0; z-index:50;
+  display:flex; gap:8px; padding:14px 20px; overflow-x:auto;
+  background:rgba(27,21,18,.88); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.chip{
+  flex:none; background:transparent; border:1px solid var(--line); color:var(--tan);
+  padding:8px 16px; border-radius:100px; font-size:13px; letter-spacing:.03em;
+  cursor:pointer; white-space:nowrap; transition:all .2s ease;
+}
+.chip:hover{ border-color:var(--gold); color:var(--flour); }
+.chip.active{ background:var(--ember); border-color:var(--ember); color:var(--flour); }
+
+/* CHAPTERS */
+.chapter{ max-width:820px; margin:0 auto; padding:90px 24px 20px; position:relative; z-index:1; }
+.chapter-head{ margin-bottom:46px; }
+.eyebrow{ display:block; color:var(--gold); font-size:13px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:10px; font-family:'IBM Plex Mono',monospace;}
+.chapter-head h2{ font-size:clamp(32px,5vw,52px); margin:0; text-transform:uppercase; color:var(--flour); }
+
+.timeline{ position:relative; }
+.step{ display:grid; grid-template-columns:64px 24px 1fr; column-gap:6px; margin-bottom:6px; }
+.step-num{ font-family:'IBM Plex Mono',monospace; color:var(--ember); font-size:13px; padding-top:6px; }
+.step-rail{ position:relative; display:flex; justify-content:center; }
+.step-rail::before{ content:""; position:absolute; top:0; bottom:-6px; width:1px; background:var(--line); }
+.step:last-child .step-rail::before{ bottom:50%; }
+.step-dot{ width:9px; height:9px; border-radius:50%; background:var(--crust2); border:2px solid var(--gold); margin-top:6px; z-index:1; }
+.step-body{ padding-bottom:38px; }
+.step-body h3{ margin:0 0 10px; font-size:23px; color:var(--flour); text-transform:none; letter-spacing:0; font-weight:600;}
+.step-body p{ margin:0 0 10px; color:var(--tan); font-size:15.5px; }
+.step-icon{ margin-top:14px; opacity:.95; }
+.step-icon svg{ display:block; }
+
+/* FOOTER */
+.footer{ position:relative; z-index:1; max-width:760px; margin:100px auto 0; padding:70px 24px 100px; text-align:center; border-top:1px solid var(--line);}
+.footer .quote-eyebrow{ font-family:'IBM Plex Mono',monospace; color:var(--gold); letter-spacing:.2em; font-size:12px; text-transform:uppercase;}
+.footer blockquote{ font-family:'Big Shoulders Display',sans-serif; font-size:clamp(26px,4vw,40px); font-weight:800; text-transform:uppercase; line-height:1.15; margin:18px 0 26px; color:var(--flour);}
+.footer blockquote span{ color:var(--ember); }
+.footer p{ color:var(--tan); max-width:520px; margin:0 auto; }
+.ticket{
+  margin:50px auto 0; max-width:340px; background:var(--crust2); border:1px dashed var(--line);
+  padding:22px; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--tan);
+}
+.ticket div{ display:flex; justify-content:space-between; padding:3px 0; }
+.ticket .tt{ color:var(--flour); border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:8px; text-transform:uppercase; letter-spacing:.1em; font-size:11px;}
+
+@media (prefers-reduced-motion: reduce){
+  .glow,.ring,.ring-icon,.ring-icon>svg{ animation:none !important; }
+}
+@media (max-width:640px){
+  .step{ grid-template-columns:44px 20px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="glow"></div>
+  <div class="eyebrow-top">48-hour dough — 82 steps — 4 pizzas</div>
+  <div class="ring">
+    <div class="ring-center"><svg viewBox="0 0 120 120" width="84" height="84" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+    <div class="ring-icon" style="--angle:0deg"><svg viewBox="0 0 120 120" width="54" height="54" aria-hidden="true"><circle cx="60" cy="65" r="42" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M35 55 Q60 40 85 55" fill="none" stroke="var(--ink)" stroke-width="4"/></svg></div>
+<div class="ring-icon" style="--angle:45deg"><svg viewBox="0 0 120 120" width="54" height="54" aria-hidden="true"><circle cx="60" cy="60" r="40" fill="var(--ember)" stroke="var(--ink)" stroke-width="6"/><circle cx="48" cy="50" r="5" fill="#7A1F14"/><circle cx="70" cy="65" r="5" fill="#7A1F14"/><circle cx="58" cy="75" r="5" fill="#7A1F14"/></svg></div>
+<div class="ring-icon" style="--angle:90deg"><svg viewBox="0 0 120 120" width="54" height="54" aria-hidden="true"><path d="M20 90 L60 25 L100 90 Z" fill="#F9E27D" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="65" r="4" fill="var(--ink)"/><circle cx="70" cy="75" r="4" fill="var(--ink)"/></svg></div>
+<div class="ring-icon" style="--angle:135deg"><svg viewBox="0 0 120 120" width="54" height="54" aria-hidden="true"><path d="M60 20 C40 45 35 65 45 80 C40 65 55 60 55 60 C55 75 70 80 70 65 C80 75 78 90 65 98 C90 90 95 60 60 20 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="4"/></svg></div>
+<div class="ring-icon" style="--angle:180deg"><svg viewBox="0 0 120 120" width="54" height="54" aria-hidden="true"><circle cx="60" cy="60" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><line x1="60" y1="60" x2="60" y2="32" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><line x1="60" y1="60" x2="80" y2="65" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/></svg></div>
+<div class="ring-icon" style="--angle:225deg"><svg viewBox="0 0 120 120" width="54" height="54" aria-hidden="true"><ellipse cx="60" cy="60" rx="30" ry="20" fill="var(--basil)" stroke="var(--ink)" stroke-width="6" transform="rotate(-30 60 60)"/><line x1="35" y1="80" x2="85" y2="35" stroke="var(--ink)" stroke-width="3"/></svg></div>
+<div class="ring-icon" style="--angle:270deg"><svg viewBox="0 0 120 120" width="54" height="54" aria-hidden="true"><rect x="20" y="25" width="80" height="70" rx="6" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="32" y="45" width="56" height="40" rx="4" fill="#2C3E50"/><circle cx="60" cy="65" r="12" fill="var(--gold)"/></svg></div>
+<div class="ring-icon" style="--angle:315deg"><svg viewBox="0 0 120 120" width="54" height="54" aria-hidden="true"><path d="M60 15 L71 45 L103 45 L77 63 L88 95 L60 76 L32 95 L43 63 L17 45 L49 45 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/></svg></div>
+  </div>
+  <h1 class="title">The Ultimate<br><em>Homemade Pizza</em></h1>
+  <p class="hero-sub">This recipe is designed to produce a classic Neapolitan-inspired homemade pizza: thin and flexible in the center, slightly crisp underneath, with a puffy, airy crust around the edge, a flavorful tomato sauce, melted mozzarella, olive oil, and basil.</p>
+  <div class="hero-meta">
+    <div><b>4</b>pizzas · 28–30cm</div>
+    <div><b>48h</b>fermentation</div>
+    <div><b>65%</b>hydration</div>
+    <div><b>82</b>steps</div>
+  </div>
+  <div class="scroll-cue">↓ scroll to start cooking</div>
+</section>
+
+<nav class="nav" id="nav">
+  <button class="chip" data-target="ch-0">Mise en Place</button>
+<button class="chip" data-target="ch-1">The Dough</button>
+<button class="chip" data-target="ch-2">Sauce &amp; Cheese</button>
+<button class="chip" data-target="ch-3">Bake Day</button>
+<button class="chip" data-target="ch-4">The Pizzas</button>
+<button class="chip" data-target="ch-5">Troubleshooting &amp; Science</button>
+<button class="chip" data-target="ch-6">Storage &amp; Master Card</button>
+</nav>
+
+
+  <section class="chapter" id="ch-0">
+    <div class="chapter-head">
+      <span class="eyebrow">The Basics — Chapter 1</span>
+      <h2>Mise en Place</h2>
+    </div>
+    <div class="timeline">
+      
+    <article class="step" id="step-1">
+      <div class="step-num">N&deg;01</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Ingredients</h3>
+        <p>🍞 Pizza dough</p>
+<p>For 4 pizzas:</p>
+<p>Bread flour or strong pizza flour: 600 g</p>
+<p>Water: 390 g</p>
+<p>Fine sea salt: 18 g</p>
+<p>Instant dry yeast: 1.5 g</p>
+<p>Olive oil: 10 g, optional</p>
+<p>This gives approximately 65% hydration.</p>
+<p>That means the dough contains water equal to about 65% of the flour's weight.</p>
+<p>This is a useful level for a home pizza: wet enough to create a light, airy crust, but not so wet that it becomes impossible to handle.</p>
+<p>Flour</p>
+<p>If you can find it, use:</p>
+<p>Italian 00 pizza flour</p>
+<p>strong bread flour</p>
+<p>pizza flour with approximately 11.5–13% protein</p>
+<p>Don't obsess over the "00" designation. "00" mainly describes how finely the flour is milled. It does not automatically mean that every 00 flour is ideal for pizza.</p>
+<p>For long fermentation, flour strength matters.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M20 55 Q60 100 100 55 L95 60 Q60 90 25 60 Z" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><circle cx="45" cy="45" r="6" fill="var(--gold)"/><circle cx="65" cy="40" r="6" fill="var(--gold)"/><circle cx="55" cy="55" r="6" fill="var(--gold)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-2">
+      <div class="step-num">N&deg;02</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Tomato sauce</h3>
+        <p>You don't need to cook the sauce.</p>
+<p>For approximately 4 pizzas:</p>
+<p>400 g canned peeled tomatoes</p>
+<p>1–2 g fine sea salt</p>
+<p>1 tablespoon extra-virgin olive oil</p>
+<p>Optional: a small amount of dried oregano</p>
+<p>Optional: 1 small garlic clove</p>
+<p>Optional: a few basil leaves</p>
+<p>For a classic pizza, I strongly recommend keeping the sauce simple.</p>
+<p>The tomato should taste like tomato.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="40" fill="var(--ember)" stroke="var(--ink)" stroke-width="6"/><circle cx="48" cy="50" r="5" fill="#7A1F14"/><circle cx="70" cy="65" r="5" fill="#7A1F14"/><circle cx="58" cy="75" r="5" fill="#7A1F14"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-3">
+      <div class="step-num">N&deg;03</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Cheese</h3>
+        <p>The classic choice is mozzarella.</p>
+<p>You can use:</p>
+<p>Fresh mozzarella</p>
+<p>Very delicious, but it contains a lot of water.</p>
+<p>If using fresh mozzarella:</p>
+<p>Drain it.</p>
+<p>Tear it into pieces.</p>
+<p>Place it on a plate.</p>
+<p>Refrigerate it uncovered for several hours, or ideally overnight.</p>
+<p>This allows excess moisture to escape.</p>
+<p>Low-moisture mozzarella</p>
+<p>This is actually extremely convenient for home ovens.</p>
+<p>It melts beautifully and produces less water on your pizza.</p>
+<p>Best combination</p>
+<p>For a particularly good home pizza, try:</p>
+<p>70% low-moisture mozzarella + 30% fresh mozzarella.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M20 90 L60 25 L100 90 Z" fill="#F9E27D" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="65" r="4" fill="var(--ink)"/><circle cx="70" cy="75" r="4" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-4">
+      <div class="step-num">N&deg;04</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Toppings</h3>
+        <p>For the simplest and most classic pizza:</p>
+<p>Tomato sauce</p>
+<p>Mozzarella</p>
+<p>Fresh basil</p>
+<p>Extra-virgin olive oil</p>
+<p>You can add: mushrooms, onions, olives, roasted peppers, cooked sausage, ham, prosciutto, anchovies, chili flakes, Parmesan, pecorino, garlic, artichokes.</p>
+<p>But there is an important rule:</p>
+<p>Don't overload the pizza.</p>
+<p>Pizza dough is relatively delicate.</p>
+<p>Every additional topping contributes: weight, moisture, steam, cooling, cooking time.</p>
+<p>A pizza covered with six different toppings can actually taste worse than a pizza with three excellent ingredients.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-5">
+      <div class="step-num">N&deg;05</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Equipment</h3>
+        <p>Ideally: Large mixing bowl, Kitchen scale, Dough scraper, Plastic container or covered tray, Baking paper if necessary, Pizza peel, Pizza stone or pizza steel, Very hot oven.</p>
+<p>Pizza steel</p>
+<p>If you have one, use it.</p>
+<p>A steel transfers heat extremely efficiently into the bottom of the pizza.</p>
+<p>Pizza stone</p>
+<p>Also excellent.</p>
+<p>No stone or steel?</p>
+<p>Don't worry.</p>
+<p>You can use: a heavy baking tray, an upside-down baking sheet, a cast-iron pan.</p>
+<p>An upside-down baking sheet placed near the top of a very hot oven can work surprisingly well.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch-1">
+    <div class="chapter-head">
+      <span class="eyebrow">Fermentation — Chapter 2</span>
+      <h2>The Dough</h2>
+    </div>
+    <div class="timeline">
+      
+    <article class="step" id="step-6">
+      <div class="step-num">N&deg;06</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The 48-hour schedule</h3>
+        <p>Here's the overall plan.</p>
+<p>Day 1: Morning or afternoon — Make dough. Let it ferment at room temperature. Divide into four balls. Refrigerate.</p>
+<p>Day 2: Keep dough refrigerated. The slow fermentation develops flavor and structure.</p>
+<p>Day 3: Remove dough from refrigerator approximately 2–4 hours before baking. Preheat oven aggressively. Shape pizza. Add toppings. Bake.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="20" y="25" width="80" height="70" rx="6" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><line x1="20" y1="45" x2="100" y2="45" stroke="var(--ink)" stroke-width="5"/><line x1="38" y1="15" x2="38" y2="30" stroke="var(--ink)" stroke-width="5"/><line x1="82" y1="15" x2="82" y2="30" stroke="var(--ink)" stroke-width="5"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-7">
+      <div class="step-num">N&deg;07</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Making the dough</h3>
+        <p>Step 1 — Measure everything</p>
+<p>This is one of the rare situations where I strongly recommend using a kitchen scale.</p>
+<p>Pizza dough is much easier to reproduce when measured by weight.</p>
+<p>Put your mixing bowl on the scale.</p>
+<p>Add 390 g water. Then add 1.5 g instant yeast. Mix briefly.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="65" r="42" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M35 55 Q60 40 85 55" fill="none" stroke="var(--ink)" stroke-width="4"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-8">
+      <div class="step-num">N&deg;08</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Add the flour</h3>
+        <p>Add approximately 600 g flour.</p>
+<p>Don't dump everything in blindly if you're new to handling wet dough.</p>
+<p>You can reserve around 20–30 g of the flour initially and add it if necessary.</p>
+<p>Mix with your hand, wooden spoon, or dough whisk until there is no large pocket of dry flour.</p>
+<p>At this point, the dough will look rough. That's completely normal. It may look like a sticky, ugly mass. Don't panic. Pizza dough does not need to look beautiful immediately.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><line x1="30" y1="90" x2="90" y2="90" stroke="var(--ink)" stroke-width="6"/><line x1="60" y1="30" x2="60" y2="90" stroke="var(--ink)" stroke-width="6"/><line x1="30" y1="45" x2="90" y2="45" stroke="var(--ink)" stroke-width="4"/><circle cx="30" cy="60" r="12" fill="none" stroke="var(--ink)" stroke-width="4"/><circle cx="90" cy="60" r="12" fill="none" stroke="var(--ink)" stroke-width="4"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-9">
+      <div class="step-num">N&deg;09</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Rest the dough</h3>
+        <p>Cover the bowl. Let it rest for approximately 15–20 minutes.</p>
+<p>This short rest is called an autolyse-like rest, although because yeast and other ingredients are already present, it isn't a strict traditional autolyse.</p>
+<p>Something useful happens during this period: the flour absorbs water. The dough begins becoming easier to work with.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="65" r="42" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M35 55 Q60 40 85 55" fill="none" stroke="var(--ink)" stroke-width="4"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-10">
+      <div class="step-num">N&deg;10</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Add the salt</h3>
+        <p>Add 18 g salt. Work it into the dough. Pinch and fold the dough repeatedly.</p>
+<p>At first it may feel like the salt is impossible to incorporate. Keep going. Eventually it becomes homogeneous.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="35" y="30" width="50" height="60" rx="8" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><circle cx="50" cy="50" r="3" fill="var(--ink)"/><circle cx="65" cy="55" r="3" fill="var(--ink)"/><circle cx="55" cy="70" r="3" fill="var(--ink)"/><circle cx="70" cy="68" r="3" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-11">
+      <div class="step-num">N&deg;11</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Add olive oil</h3>
+        <p>Add 10 g olive oil, if using. This is optional.</p>
+<p>Traditional Neapolitan dough doesn't require oil.</p>
+<p>However, in a home oven, a little oil can help with: browning, tenderness, handling, flavor.</p>
+<p>If you want a more traditional Neapolitan-style dough, leave it out.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 25 C48 45 42 60 42 72 A18 18 0 0 0 78 72 C78 60 72 45 60 25 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-12">
+      <div class="step-num">N&deg;12</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Kneading</h3>
+        <p>You don't need to aggressively beat the dough for 20 minutes.</p>
+<p>Instead, use a combination of: kneading + resting + folding. This is much easier.</p>
+<p>Method: Grab one side of the dough. Stretch it upward. Fold it over itself. Rotate the bowl. Repeat.</p>
+<p>Do this approximately 8–10 times. Then cover the dough and rest it for 10 minutes. Repeat this process another 1–2 times.</p>
+<p>You'll notice something remarkable. The dough gradually changes. Initially: sticky, rough, weak. Later: smoother, elastic, stronger. This is gluten development.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="45" cy="60" r="30" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M75 40 Q95 60 75 80" fill="none" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-13">
+      <div class="step-num">N&deg;13</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>What is gluten?</h3>
+        <p>Flour contains proteins. When those proteins interact with water and mechanical movement, they form a network. That network is gluten.</p>
+<p>Gluten provides structure. It allows the dough to stretch, trap fermentation gases, rise, hold its shape.</p>
+<p>You don't want a completely rigid dough. You want a dough that is strong but extensible. That distinction is extremely important.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="25" y="45" width="70" height="30" rx="15" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M35 55 Q60 45 85 55 M35 65 Q60 75 85 65" stroke="var(--ink)" stroke-width="3" fill="none"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-14">
+      <div class="step-num">N&deg;14</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The windowpane test</h3>
+        <p>Take a small piece of dough. Stretch it gently between your fingers. Try to make a thin membrane.</p>
+<p>If you can stretch it until light passes through without it immediately tearing, your gluten development is good. This is called the windowpane test.</p>
+<p>It doesn't have to be perfect. Pizza dough can continue developing during fermentation.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="25" y="45" width="70" height="30" rx="15" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M35 55 Q60 45 85 55 M35 65 Q60 75 85 65" stroke="var(--ink)" stroke-width="3" fill="none"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-15">
+      <div class="step-num">N&deg;15</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>First fermentation</h3>
+        <p>Put the dough into a lightly oiled container. Cover it. Leave it at room temperature for approximately 1–2 hours.</p>
+<p>The goal isn't necessarily to double the dough. You are looking for signs of fermentation: slight expansion, bubbles, smoother texture, increased elasticity, pleasant fermented aroma.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="65" r="35" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><circle cx="45" cy="55" r="6" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="65" cy="45" r="8" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="75" cy="70" r="5" fill="#fff" stroke="var(--ink)" stroke-width="2"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-16">
+      <div class="step-num">N&deg;16</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Divide the dough</h3>
+        <p>Turn the dough onto a lightly floured work surface. Divide it into 4 equal pieces.</p>
+<p>With 600 g flour, your dough will weigh approximately 1 kg total after adding water, salt, yeast, and oil. Each dough ball will therefore be approximately 250 g. This is a great size for a 28–30 cm pizza.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="38" cy="38" r="16" fill="var(--flour)" stroke="var(--ink)" stroke-width="4"/><circle cx="82" cy="38" r="16" fill="var(--flour)" stroke="var(--ink)" stroke-width="4"/><circle cx="38" cy="82" r="16" fill="var(--flour)" stroke="var(--ink)" stroke-width="4"/><circle cx="82" cy="82" r="16" fill="var(--flour)" stroke="var(--ink)" stroke-width="4"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-17">
+      <div class="step-num">N&deg;17</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Forming dough balls</h3>
+        <p>Take one piece. Fold the edges toward the bottom. Rotate it. Continue until you have created a smooth upper surface.</p>
+<p>Then gently drag the dough ball across the work surface toward yourself. The friction between the dough and counter creates surface tension.</p>
+<p>You want: smooth top and sealed underside. Don't completely crush the dough. You are building a little package of gluten.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="38" cy="38" r="16" fill="var(--flour)" stroke="var(--ink)" stroke-width="4"/><circle cx="82" cy="38" r="16" fill="var(--flour)" stroke="var(--ink)" stroke-width="4"/><circle cx="38" cy="82" r="16" fill="var(--flour)" stroke="var(--ink)" stroke-width="4"/><circle cx="82" cy="82" r="16" fill="var(--flour)" stroke="var(--ink)" stroke-width="4"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-18">
+      <div class="step-num">N&deg;18</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Refrigeration</h3>
+        <p>Place the four dough balls into a covered container. Leave enough space between them. Cover tightly.</p>
+<p>Refrigerate at approximately 3–5°C / 37–41°F. Leave them for 36–48 hours. This is where the magic happens.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="30" y="15" width="60" height="90" rx="6" fill="#D6EAF8" stroke="var(--ink)" stroke-width="6"/><line x1="30" y1="50" x2="90" y2="50" stroke="var(--ink)" stroke-width="4"/><circle cx="80" cy="35" r="3" fill="var(--ink)"/><circle cx="80" cy="70" r="3" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-19">
+      <div class="step-num">N&deg;19</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why ferment for two days?</h3>
+        <p>Fermentation isn't simply about making dough rise. It also changes flavor and texture.</p>
+<p>During fermentation, yeast consumes sugars and produces: carbon dioxide, alcohol, flavor compounds. Meanwhile, enzymes in the flour modify the dough.</p>
+<p>Long fermentation can produce: more complex flavor, better browning, improved extensibility, lighter texture, more aromatic crust.</p>
+<p>This is one reason a pizza made with dough fermented for two days can taste dramatically more interesting than one made immediately after mixing.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="65" r="35" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><circle cx="45" cy="55" r="6" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="65" cy="45" r="8" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="75" cy="70" r="5" fill="#fff" stroke="var(--ink)" stroke-width="2"/></svg></div>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch-2">
+    <div class="chapter-head">
+      <span class="eyebrow">Toppings — Chapter 3</span>
+      <h2>Sauce &amp; Cheese</h2>
+    </div>
+    <div class="timeline">
+      
+    <article class="step" id="step-20">
+      <div class="step-num">N&deg;20</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Making the tomato sauce</h3>
+        <p>While your dough is fermenting, make your sauce.</p>
+<p>Open 400 g canned peeled tomatoes. If they're whole tomatoes, crush them with your hands. Remove any tough stem pieces.</p>
+<p>Add 1–2 g salt. Add 1 tablespoon olive oil. That's enough.</p>
+<p>You can blend the tomatoes, but I actually prefer crushing them by hand. This produces a slightly rustic texture.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="40" fill="var(--ember)" stroke="var(--ink)" stroke-width="6"/><circle cx="48" cy="50" r="5" fill="#7A1F14"/><circle cx="70" cy="65" r="5" fill="#7A1F14"/><circle cx="58" cy="75" r="5" fill="#7A1F14"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-21">
+      <div class="step-num">N&deg;21</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Should you cook the sauce?</h3>
+        <p>For this style of pizza: No.</p>
+<p>The sauce cooks on the pizza. Using raw tomatoes gives you: fresh flavor, acidity, brightness, less concentrated sweetness.</p>
+<p>However, if you're making pizza in a relatively cool home oven and baking for 8–12 minutes, a cooked sauce can work better. More on that later.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="40" fill="var(--ember)" stroke="var(--ink)" stroke-width="6"/><circle cx="48" cy="50" r="5" fill="#7A1F14"/><circle cx="70" cy="65" r="5" fill="#7A1F14"/><circle cx="58" cy="75" r="5" fill="#7A1F14"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-22">
+      <div class="step-num">N&deg;22</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Preparing the cheese</h3>
+        <p>Take your mozzarella. Cut or tear it into small pieces. Avoid creating giant chunks.</p>
+<p>A giant piece of mozzarella can release a lot of water in one location. Small pieces distribute the cheese more evenly.</p>
+<p>If using fresh mozzarella, drain it thoroughly. This is one of the most important moisture-control steps.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M20 90 L60 25 L100 90 Z" fill="#F9E27D" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="65" r="4" fill="var(--ink)"/><circle cx="70" cy="75" r="4" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch-3">
+    <div class="chapter-head">
+      <span class="eyebrow">The Oven — Chapter 4</span>
+      <h2>Bake Day</h2>
+    </div>
+    <div class="timeline">
+      
+    <article class="step" id="step-23">
+      <div class="step-num">N&deg;23</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Baking day</h3>
+        <p>This is where many homemade pizzas fail.</p>
+<p>The dough might be excellent. The sauce might be excellent. The cheese might be excellent.</p>
+<p>But if the oven isn't hot enough, the pizza becomes: soft, pale, wet, and bready.</p>
+<p>We want: very high heat.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-24">
+      <div class="step-num">N&deg;24</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Preheat the oven</h3>
+        <p>Put your pizza steel or stone inside the oven. Place it relatively high in the oven.</p>
+<p>Then preheat to the maximum temperature your oven safely reaches. For many domestic ovens, that's 250–300°C / 480–570°F.</p>
+<p>If your oven has a broiler/grill function, that's extremely useful.</p>
+<p>Preheat for at least 45–60 minutes. A stone or steel needs time to become thoroughly hot.</p>
+<p>Don't assume that because the oven says "preheated," the cooking surface is fully ready.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="20" y="25" width="80" height="70" rx="6" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="32" y="45" width="56" height="40" rx="4" fill="#2C3E50"/><circle cx="60" cy="65" r="12" fill="var(--gold)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-25">
+      <div class="step-num">N&deg;25</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why the oven needs to be so hot</h3>
+        <p>A professional pizza oven can reach temperatures far above a normal home oven.</p>
+<p>A Neapolitan pizza may cook in roughly 60–120 seconds. A home oven might require 4–8 minutes, depending on temperature and setup.</p>
+<p>The hotter the oven, the faster the pizza cooks.</p>
+<p>Fast cooking gives you the ideal combination: crisp bottom, airy crust, melted cheese, browned toppings, moist center.</p>
+<p>Slow cooking tends to dry the crust before you get good browning.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="20" y="25" width="80" height="70" rx="6" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="32" y="45" width="56" height="40" rx="4" fill="#2C3E50"/><circle cx="60" cy="65" r="12" fill="var(--gold)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-26">
+      <div class="step-num">N&deg;26</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Remove dough from refrigerator</h3>
+        <p>Take out one dough ball approximately 2–4 hours before baking. The exact timing depends on your room temperature.</p>
+<p>At this stage, the dough should become: softer, more relaxed, slightly larger, easier to stretch.</p>
+<p>Don't immediately attack a cold dough ball. Cold dough is much harder to stretch.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="30" y="15" width="60" height="90" rx="6" fill="#D6EAF8" stroke="var(--ink)" stroke-width="6"/><line x1="30" y1="50" x2="90" y2="50" stroke="var(--ink)" stroke-width="4"/><circle cx="80" cy="35" r="3" fill="var(--ink)"/><circle cx="80" cy="70" r="3" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-27">
+      <div class="step-num">N&deg;27</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The most important pizza-shaping rule</h3>
+        <p>Do NOT use a rolling pin.</p>
+<p>A rolling pin pushes all the fermentation gas out of the dough. Those gas bubbles are valuable. They are responsible for the beautiful airy crust.</p>
+<p>Instead: stretch the dough gently with your hands.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="30" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M20 50 L10 60 L20 70 M100 50 L110 60 L100 70" fill="none" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-28">
+      <div class="step-num">N&deg;28</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Shaping the pizza</h3>
+        <p>Generously flour your work surface. Rice flour can be particularly useful because it doesn't absorb water as quickly as wheat flour.</p>
+<p>Take one dough ball. Place it on the flour. Dust the top lightly. Press your fingertips into the center. Work outward.</p>
+<p>Leave approximately 2–3 cm / 1 inch around the edge untouched. This becomes your crust.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="30" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M20 50 L10 60 L20 70 M100 50 L110 60 L100 70" fill="none" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-29">
+      <div class="step-num">N&deg;29</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why leave the edge untouched?</h3>
+        <p>Because the edge contains fermentation gases. When heated, those gases expand. The gluten network stretches. Water turns into steam.</p>
+<p>The result: puffy crust.</p>
+<p>If you aggressively flatten the edge, you remove the very thing you're trying to create.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="30" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M20 50 L10 60 L20 70 M100 50 L110 60 L100 70" fill="none" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-30">
+      <div class="step-num">N&deg;30</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Continue stretching</h3>
+        <p>Once you've flattened the center, gently lift the dough. Use the backs of your hands or fingertips. Rotate the dough. Let gravity help. Stretch gradually.</p>
+<p>You're aiming for approximately 28–30 cm / 11–12 inches.</p>
+<p>Don't force it. If the dough keeps shrinking: stop. Let it rest for 5–10 minutes. Then continue. Shrinking usually means the gluten is resisting. Resting allows the gluten to relax.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="30" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M20 50 L10 60 L20 70 M100 50 L110 60 L100 70" fill="none" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-31">
+      <div class="step-num">N&deg;31</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>How thin should the center be?</h3>
+        <p>The center should be quite thin. You should almost be able to see light through parts of it. But don't create holes.</p>
+<p>A thin center cooks quickly and creates the characteristic pizza texture.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-32">
+      <div class="step-num">N&deg;32</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Transfer to the peel</h3>
+        <p>Dust your pizza peel with a small amount of flour. Alternatively, use semolina or rice flour.</p>
+<p>Place the stretched dough onto the peel. Work quickly now. Once the dough touches the peel, it can begin sticking.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><ellipse cx="45" cy="45" rx="35" ry="25" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><line x1="70" y1="60" x2="100" y2="100" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-33">
+      <div class="step-num">N&deg;33</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Sauce</h3>
+        <p>Add approximately 60–80 g tomato sauce. Don't pour half the jar onto the pizza.</p>
+<p>Use the back of a spoon. Start near the center. Move outward in a spiral. Stop before the crust.</p>
+<p>You want a thin, even layer.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="40" fill="var(--ember)" stroke="var(--ink)" stroke-width="6"/><circle cx="48" cy="50" r="5" fill="#7A1F14"/><circle cx="70" cy="65" r="5" fill="#7A1F14"/><circle cx="58" cy="75" r="5" fill="#7A1F14"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-34">
+      <div class="step-num">N&deg;34</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Cheese</h3>
+        <p>Add approximately 80–100 g mozzarella. Distribute it evenly. Don't completely cover every millimeter of sauce.</p>
+<p>Some tomato should remain visible. Some exposed sauce will become concentrated and flavorful.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M20 90 L60 25 L100 90 Z" fill="#F9E27D" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="65" r="4" fill="var(--ink)"/><circle cx="70" cy="75" r="4" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-35">
+      <div class="step-num">N&deg;35</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Basil</h3>
+        <p>Add a few basil leaves. You can put some under the cheese and some on top.</p>
+<p>At extremely high temperatures, basil can burn quickly. An alternative is to add fresh basil after baking.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><ellipse cx="60" cy="60" rx="30" ry="20" fill="var(--basil)" stroke="var(--ink)" stroke-width="6" transform="rotate(-30 60 60)"/><line x1="35" y1="80" x2="85" y2="35" stroke="var(--ink)" stroke-width="3"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-36">
+      <div class="step-num">N&deg;36</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Olive oil</h3>
+        <p>Finish with a small drizzle: 1–2 teaspoons extra-virgin olive oil. Don't drown the pizza. A little goes a long way.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 25 C48 45 42 60 42 72 A18 18 0 0 0 78 72 C78 60 72 45 60 25 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-37">
+      <div class="step-num">N&deg;37</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The launch</h3>
+        <p>This is the moment that makes beginners nervous.</p>
+<p>Shake the peel gently. The pizza should move.</p>
+<p>If it doesn't: DO NOT PUT IT IN THE OVEN YET.</p>
+<p>A stuck pizza is difficult to recover. Lift the edge of the dough carefully and throw a little flour underneath the sticky section. Then shake again.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="45" cy="60" r="30" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M80 60 L100 60 M92 50 L102 60 L92 70" fill="none" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-38">
+      <div class="step-num">N&deg;38</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Launching onto the stone</h3>
+        <p>Open the oven. Position the peel close to the baking surface. Then make a quick forward-and-back movement.</p>
+<p>The dough should slide off. Pull the peel away. The pizza remains on the hot surface. Immediately close the oven.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="45" cy="60" r="30" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M80 60 L100 60 M92 50 L102 60 L92 70" fill="none" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-39">
+      <div class="step-num">N&deg;39</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Baking</h3>
+        <p>At maximum home-oven temperature: approximately 4–7 minutes is a reasonable starting range.</p>
+<p>But don't blindly follow the clock. Watch the pizza. You're looking for: bubbling cheese, browned spots, puffed crust, darkened underside, blistering around the rim, fully cooked center.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-40">
+      <div class="step-num">N&deg;40</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Using the broiler/grill</h3>
+        <p>This is one of my favorite home-pizza tricks.</p>
+<p>If the bottom is cooked but the top isn't sufficiently browned: turn on the broiler/grill.</p>
+<p>Move the pizza closer to the upper heating element. Watch it constantly. It may go from "not browned enough" to "burned" very quickly. Sometimes only 30–60 seconds can make a huge difference.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="20" y="25" width="80" height="70" rx="6" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="32" y="45" width="56" height="40" rx="4" fill="#2C3E50"/><circle cx="60" cy="65" r="12" fill="var(--gold)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-41">
+      <div class="step-num">N&deg;41</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Don't cut immediately</h3>
+        <p>Remove the pizza. Place it on a cutting board. Wait approximately 30–60 seconds. Then cut.</p>
+<p>Why? Because the cheese and internal moisture are still extremely hot. Cutting immediately can cause everything to slide around.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M25 85 L80 30 L95 45 L40 100 Z" fill="#D5D8DC" stroke="var(--ink)" stroke-width="5"/><rect x="85" y="20" width="14" height="30" rx="4" fill="var(--ink)" transform="rotate(45 92 35)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-42">
+      <div class="step-num">N&deg;42</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Final finishing</h3>
+        <p>After baking, add: fresh basil, extra-virgin olive oil, Parmesan, chili flakes, freshly ground black pepper — depending on the pizza.</p>
+<p>For a Margherita, I like: basil + tiny drizzle of olive oil. That's it.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L71 45 L103 45 L77 63 L88 95 L60 76 L32 95 L43 63 L17 45 L49 45 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/></svg></div>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch-4">
+    <div class="chapter-head">
+      <span class="eyebrow">The Recipes — Chapter 5</span>
+      <h2>The Pizzas</h2>
+    </div>
+    <div class="timeline">
+      
+    <article class="step" id="step-43">
+      <div class="step-num">N&deg;43</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Your first pizza: Margherita</h3>
+        <p>Ingredients for one pizza: 1 × 250 g dough ball, 60–80 g tomato sauce, 80–100 g mozzarella, 3–5 basil leaves, 1–2 teaspoons extra-virgin olive oil.</p>
+<p>Procedure: Preheat oven and stone/steel thoroughly. Bring dough to room temperature. Flour the work surface. Remove dough from container. Gently press the center. Preserve the outer rim. Stretch to approximately 28–30 cm. Transfer to floured peel. Add tomato sauce. Add mozzarella. Add basil. Drizzle olive oil. Shake peel to ensure mobility. Launch. Bake until crust is puffed and browned. Use broiler if necessary. Remove. Rest briefly. Add finishing basil/olive oil. Slice. Eat immediately.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L71 45 L103 45 L77 63 L88 95 L60 76 L32 95 L43 63 L17 45 L49 45 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-44">
+      <div class="step-num">N&deg;44</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Pizza #2 — Pepperoni</h3>
+        <p>For one pizza: 250 g dough, 60–70 g tomato sauce, 90 g mozzarella, 50–70 g pepperoni, chili flakes, olive oil.</p>
+<p>Put the pepperoni on top of the cheese. The fat will render during baking.</p>
+<p>If you want crispy pepperoni cups, arrange slices so their edges can curl. Don't use too much. A massive amount of pepperoni creates an oily pizza.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-45">
+      <div class="step-num">N&deg;45</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Pizza #3 — Mushroom</h3>
+        <p>Use: tomato sauce, mozzarella, mushrooms, Parmesan, olive oil, thyme.</p>
+<p>Important: Raw mushrooms contain a lot of water. If you put a huge pile of raw mushrooms on your pizza, you'll probably get wet pizza.</p>
+<p>Instead: Slice mushrooms thinly. Cook them briefly in a hot pan. Allow them to release moisture. Cool them. Put them on the pizza. This produces much better results.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-46">
+      <div class="step-num">N&deg;46</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Pizza #4 — Prosciutto and arugula</h3>
+        <p>Bake the pizza with: tomato, mozzarella, olive oil.</p>
+<p>After baking, add: thinly sliced prosciutto, arugula, Parmesan, olive oil.</p>
+<p>The key is that the prosciutto and arugula don't necessarily need to be cooked. Their fresh texture contrasts beautifully with the hot pizza.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><ellipse cx="60" cy="60" rx="30" ry="20" fill="var(--basil)" stroke="var(--ink)" stroke-width="6" transform="rotate(-30 60 60)"/><line x1="35" y1="80" x2="85" y2="35" stroke="var(--ink)" stroke-width="3"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-47">
+      <div class="step-num">N&deg;47</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Pizza #5 — Four cheese</h3>
+        <p>Use approximately: mozzarella, Gorgonzola, Parmesan, Fontina.</p>
+<p>Don't cover the pizza with enormous quantities of cheese. A four-cheese pizza should still have balance. The cheeses should complement each other rather than creating a thick layer of melted fat.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M20 90 L60 25 L100 90 Z" fill="#F9E27D" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="65" r="4" fill="var(--ink)"/><circle cx="70" cy="75" r="4" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-48">
+      <div class="step-num">N&deg;48</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Pizza #6 — Garlic and herb</h3>
+        <p>Try: mozzarella, roasted garlic, Parmesan, oregano, basil, olive oil.</p>
+<p>Roasted garlic is much sweeter and softer than raw garlic. You can roast whole garlic cloves until tender, then mash them into a paste.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><ellipse cx="60" cy="60" rx="30" ry="20" fill="var(--basil)" stroke="var(--ink)" stroke-width="6" transform="rotate(-30 60 60)"/><line x1="35" y1="80" x2="85" y2="35" stroke="var(--ink)" stroke-width="3"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-49">
+      <div class="step-num">N&deg;49</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Pizza #7 — Spicy pizza</h3>
+        <p>Use: tomato sauce, mozzarella, spicy sausage, chili flakes, red onion, hot honey after baking.</p>
+<p>The combination of heat + salt + acidity + sweetness is fantastic.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch-5">
+    <div class="chapter-head">
+      <span class="eyebrow">The Craft — Chapter 6</span>
+      <h2>Troubleshooting &amp; Science</h2>
+    </div>
+    <div class="timeline">
+      
+    <article class="step" id="step-50">
+      <div class="step-num">N&deg;50</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The science of crispy pizza</h3>
+        <p>A pizza crust becomes crisp largely because water leaves the dough during baking. The surface becomes hotter and drier.</p>
+<p>The Maillard reaction then creates complex browned flavors. This reaction is responsible for many of the aromas associated with: bread, roasted meat, toasted nuts, baked potatoes, pizza crust.</p>
+<p>High heat accelerates browning.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 20 C40 45 35 65 45 80 C40 65 55 60 55 60 C55 75 70 80 70 65 C80 75 78 90 65 98 C90 90 95 60 60 20 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="4"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-51">
+      <div class="step-num">N&deg;51</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why your crust might be pale</h3>
+        <p>If your crust is pale, possible causes include:</p>
+<p>Oven isn't hot enough — Most common.</p>
+<p>Stone isn't preheated enough — Also common.</p>
+<p>Too much moisture — Too much sauce or wet cheese prevents rapid browning.</p>
+<p>Dough lacks available sugars — Very long fermentation or certain flour conditions can affect browning.</p>
+<p>Pizza is too thick — A thicker pizza takes longer to dry and brown.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="55" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><text x="60" y="72" font-size="48" text-anchor="middle" fill="var(--ink)" font-family="Georgia,serif">?</text></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-52">
+      <div class="step-num">N&deg;52</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why your pizza might be soggy</h3>
+        <p>Potential causes: too much tomato sauce, wet mozzarella, too many toppings, insufficient oven heat, stone not hot enough, pizza too thick, underbaking, toppings releasing water.</p>
+<p>The solution isn't necessarily "cook it longer." If the oven is weak, cooking longer may produce: dry crust + wet center.</p>
+<p>The better solution is often: more heat.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="55" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><text x="60" y="72" font-size="48" text-anchor="middle" fill="var(--ink)" font-family="Georgia,serif">?</text></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-53">
+      <div class="step-num">N&deg;53</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why your dough sticks to the peel</h3>
+        <p>Possible reasons: Too much time on the peel — prepare your pizza and launch it quickly. Not enough flour — use a little more. Dough is extremely wet — reduce hydration slightly. Wet toppings — sauce can leak moisture into the dough.</p>
+<p>Peel material: Wooden peels are often easier for launching. Metal peels are excellent for retrieving pizza but can sometimes make launching more difficult because dough sticks quickly.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><ellipse cx="45" cy="45" rx="35" ry="25" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><line x1="70" y1="60" x2="100" y2="100" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-54">
+      <div class="step-num">N&deg;54</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why your dough tears</h3>
+        <p>Possible reasons: insufficient gluten development, dough too wet, dough over-fermented, aggressive stretching, insufficient resting, weak flour.</p>
+<p>Try letting the dough rest for 10–15 minutes. Then stretch again gently.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="55" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><text x="60" y="72" font-size="48" text-anchor="middle" fill="var(--ink)" font-family="Georgia,serif">?</text></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-55">
+      <div class="step-num">N&deg;55</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why the dough keeps shrinking</h3>
+        <p>This is usually gluten tension. You stretch it. It shrinks. You stretch it. It shrinks again.</p>
+<p>Don't fight it. Cover it and wait 10–20 minutes. Then try again. The dough will usually become much more cooperative.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="55" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><text x="60" y="72" font-size="48" text-anchor="middle" fill="var(--ink)" font-family="Georgia,serif">?</text></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-56">
+      <div class="step-num">N&deg;56</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why your crust isn't airy</h3>
+        <p>This can happen because you: rolled the dough, pressed the rim flat, over-handled the dough, fermented too little, used too much yeast and rushed fermentation, didn't allow the dough to warm before shaping.</p>
+<p>The most important thing: Protect the gas. The bubbles created during fermentation are your friends.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="55" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><text x="60" y="72" font-size="48" text-anchor="middle" fill="var(--ink)" font-family="Georgia,serif">?</text></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-57">
+      <div class="step-num">N&deg;57</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why your pizza is too chewy</h3>
+        <p>Some chew is desirable. But if it's excessively chewy: dough may be under-fermented, flour may be extremely strong, hydration may be too low, pizza may be undercooked, dough may have been stretched too thickly.</p>
+<p>Try slightly longer fermentation and/or slightly higher hydration.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="55" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><text x="60" y="72" font-size="48" text-anchor="middle" fill="var(--ink)" font-family="Georgia,serif">?</text></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-58">
+      <div class="step-num">N&deg;58</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Why your pizza is too soft</h3>
+        <p>If you want a crispier base: preheat longer, use a steel, reduce toppings, reduce sauce, bake at maximum temperature, position steel appropriately, allow the oven to recover between pizzas.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="55" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><text x="60" y="72" font-size="48" text-anchor="middle" fill="var(--ink)" font-family="Georgia,serif">?</text></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-59">
+      <div class="step-num">N&deg;59</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Between pizzas</h3>
+        <p>This is important. When you open the oven and remove a pizza, the oven temperature can drop significantly.</p>
+<p>Wait a little before launching the next pizza. Allow the stone or steel to recover.</p>
+<p>This is particularly important if you're making 4 pizzas in succession.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="42" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><line x1="60" y1="60" x2="60" y2="32" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><line x1="60" y1="60" x2="80" y2="65" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-60">
+      <div class="step-num">N&deg;60</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Don't make four pizzas at once</h3>
+        <p>For most home ovens: one pizza at a time is best.</p>
+<p>The process becomes: Shape pizza. Top pizza. Launch. Bake. Remove. Let oven recover. Shape next pizza. Repeat.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-61">
+      <div class="step-num">N&deg;61</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>A fantastic home-oven trick</h3>
+        <p>If your oven has a top broiler: Place your steel or stone relatively close to the top heating element. Preheat thoroughly. Bake the pizza on the steel. Then finish with the broiler.</p>
+<p>This can imitate the intense top heat of a pizza oven surprisingly well. The bottom receives intense heat from the steel. The top receives intense radiant heat from the broiler. That's exactly what we're looking for.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="20" y="25" width="80" height="70" rx="6" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="32" y="45" width="56" height="40" rx="4" fill="#2C3E50"/><circle cx="60" cy="65" r="12" fill="var(--gold)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-62">
+      <div class="step-num">N&deg;62</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>A second method: cast-iron pizza</h3>
+        <p>If you don't have a pizza stone or steel, try a cast-iron pan.</p>
+<p>Put your dough into a lightly oiled cast-iron skillet. Press it gently outward. Let it rest. Add sauce and toppings. Bake at maximum temperature.</p>
+<p>This produces a thicker, deeply browned crust. It's not Neapolitan pizza. But it can be absolutely fantastic.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><ellipse cx="60" cy="65" rx="42" ry="18" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="95" y="58" width="22" height="8" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-63">
+      <div class="step-num">N&deg;63</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Detroit-style variation</h3>
+        <p>For something completely different: Use a rectangular metal pan. Generously oil it. Press dough into the pan. Let it ferment. Add cheese all the way to the edges. Add toppings. Bake.</p>
+<p>The cheese touching the pan caramelizes against the metal. The result is: crispy, cheesy edges + fluffy interior.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><ellipse cx="60" cy="65" rx="42" ry="18" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="95" y="58" width="22" height="8" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-64">
+      <div class="step-num">N&deg;64</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Pan pizza variation</h3>
+        <p>For a softer, thicker pizza: Increase the dough thickness. Use approximately 300–350 g dough per 25 cm pan. Oil the pan generously. Let the dough rise inside the pan. Add toppings. Bake until deeply browned.</p>
+<p>This is much more forgiving than thin pizza.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><ellipse cx="60" cy="65" rx="42" ry="18" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="95" y="58" width="22" height="8" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-65">
+      <div class="step-num">N&deg;65</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The importance of salt</h3>
+        <p>Salt isn't just there to make the pizza taste salty. It also affects: gluten development, fermentation, flavor, dough strength.</p>
+<p>Too little salt can make pizza taste flat. Too much can slow fermentation dramatically.</p>
+<p>The approximately 3% salt level in this recipe is a good starting point.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="35" y="30" width="50" height="60" rx="8" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><circle cx="50" cy="50" r="3" fill="var(--ink)"/><circle cx="65" cy="55" r="3" fill="var(--ink)"/><circle cx="55" cy="70" r="3" fill="var(--ink)"/><circle cx="70" cy="68" r="3" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-66">
+      <div class="step-num">N&deg;66</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The importance of water</h3>
+        <p>Water controls dough texture. More water generally means: more extensible + potentially lighter, but also: stickier + harder to handle.</p>
+<p>Less water generally means: easier handling + firmer dough, but potentially: denser crust.</p>
+<p>If you're new to pizza, don't immediately chase extremely high hydration. A manageable dough is much more useful than an impressive number.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 20 C40 55 30 70 30 82 A30 30 0 0 0 90 82 C90 70 80 55 60 20 Z" fill="#7FB3D5" stroke="var(--ink)" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-67">
+      <div class="step-num">N&deg;67</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The importance of fermentation temperature</h3>
+        <p>Temperature changes fermentation speed dramatically. Warm: fast fermentation. Cool: slow fermentation. Cold: very slow fermentation.</p>
+<p>That's why refrigeration is so useful. It gives you control.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="65" r="35" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><circle cx="45" cy="55" r="6" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="65" cy="45" r="8" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="75" cy="70" r="5" fill="#fff" stroke="var(--ink)" stroke-width="2"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-68">
+      <div class="step-num">N&deg;68</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>If you want a 24-hour dough</h3>
+        <p>Use the same basic recipe. Instead of refrigerating for 48 hours, refrigerate approximately 18–24 hours.</p>
+<p>Then bring it to room temperature for several hours before baking.</p>
+<p>The flavor will be somewhat less developed than the 48-hour version, but it can still be excellent.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="65" r="42" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><path d="M35 55 Q60 40 85 55" fill="none" stroke="var(--ink)" stroke-width="4"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-69">
+      <div class="step-num">N&deg;69</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>If you want a same-day pizza</h3>
+        <p>Use a little more yeast. For example: 600 g flour, 390 g water, 18 g salt, approximately 4–6 g instant yeast.</p>
+<p>Mix. Knead. Let ferment at room temperature. Divide. Ball. Allow the dough balls to rise. Bake the same day.</p>
+<p>The pizza can still be very good. The tradeoff is that you'll get less of the flavor associated with slow fermentation.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-70">
+      <div class="step-num">N&deg;70</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>If you want 72-hour fermentation</h3>
+        <p>You can extend refrigeration further, but you'll generally want to reduce yeast.</p>
+<p>A 72-hour dough can become extremely flavorful and extensible. However, eventually the dough can become: weak, sticky, overly acidic, difficult to shape.</p>
+<p>Longer does not automatically mean better.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="65" r="35" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><circle cx="45" cy="55" r="6" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="65" cy="45" r="8" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="75" cy="70" r="5" fill="#fff" stroke="var(--ink)" stroke-width="2"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-71">
+      <div class="step-num">N&deg;71</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Don't chase fermentation records</h3>
+        <p>A pizza fermented for 72 hours isn't automatically better than one fermented for 48 hours.</p>
+<p>The ideal fermentation depends on: flour, yeast, temperature, hydration, salt, refrigerator temperature, dough quantity, handling.</p>
+<p>Pizza is a system. Change one variable and the others can behave differently.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="65" r="35" fill="var(--flour)" stroke="var(--ink)" stroke-width="6"/><circle cx="45" cy="55" r="6" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="65" cy="45" r="8" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="75" cy="70" r="5" fill="#fff" stroke="var(--ink)" stroke-width="2"/></svg></div>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch-6">
+    <div class="chapter-head">
+      <span class="eyebrow">After Baking — Chapter 7</span>
+      <h2>Storage &amp; Master Card</h2>
+    </div>
+    <div class="timeline">
+      
+    <article class="step" id="step-72">
+      <div class="step-num">N&deg;72</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>How to store leftover pizza</h3>
+        <p>If you somehow have leftovers: Let them cool. Refrigerate in a sealed container. Eat within approximately 3–4 days for best quality.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L100 95 A45 45 0 0 1 20 95 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><circle cx="55" cy="55" r="5" fill="var(--ember)"/><circle cx="70" cy="70" r="5" fill="var(--ember)"/><circle cx="45" cy="75" r="5" fill="var(--ember)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-73">
+      <div class="step-num">N&deg;73</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Best way to reheat pizza</h3>
+        <p>Don't use the microwave if you want a crispy crust.</p>
+<p>Skillet method: Put pizza in a dry skillet. Heat over medium-low. Cover. Heat until the bottom becomes crisp. Add a few drops of water to the pan away from the pizza. Cover again briefly.</p>
+<p>The steam warms the toppings while the pan crisps the bottom. It's excellent.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 20 C40 45 35 65 45 80 C40 65 55 60 55 60 C55 75 70 80 70 65 C80 75 78 90 65 98 C90 90 95 60 60 20 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="4"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-74">
+      <div class="step-num">N&deg;74</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Oven reheating</h3>
+        <p>Preheat oven to approximately 200–230°C / 400–450°F. Put pizza directly on a rack or hot tray. Heat for 5–8 minutes.</p>
+<p>The exact time depends on thickness.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="20" y="25" width="80" height="70" rx="6" fill="#5D6D7E" stroke="var(--ink)" stroke-width="6"/><rect x="32" y="45" width="56" height="40" rx="4" fill="#2C3E50"/><circle cx="60" cy="65" r="12" fill="var(--gold)"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-75">
+      <div class="step-num">N&deg;75</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Freezing pizza dough</h3>
+        <p>You can freeze dough. After forming dough balls: Place each ball in a sealed container. Freeze. When needed, transfer to refrigerator. Allow it to thaw slowly. Bring to room temperature. Shape gently.</p>
+<p>Frozen dough may not behave exactly like freshly fermented dough, but it can work very well.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><line x1="60" y1="20" x2="60" y2="100" stroke="#7FB3D5" stroke-width="6"/><line x1="24" y1="35" x2="96" y2="85" stroke="#7FB3D5" stroke-width="6"/><line x1="96" y1="35" x2="24" y2="85" stroke="#7FB3D5" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-76">
+      <div class="step-num">N&deg;76</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Freezing baked pizza</h3>
+        <p>You can also freeze cooked slices. Separate slices with baking paper. Place into a freezer-safe container or bag. Reheat directly from frozen in a hot oven.</p>
+<p>This is considerably better than letting them sit in the refrigerator for a week.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><line x1="60" y1="20" x2="60" y2="100" stroke="#7FB3D5" stroke-width="6"/><line x1="24" y1="35" x2="96" y2="85" stroke="#7FB3D5" stroke-width="6"/><line x1="96" y1="35" x2="24" y2="85" stroke="#7FB3D5" stroke-width="6"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-77">
+      <div class="step-num">N&deg;77</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>A perfect pizza assembly formula</h3>
+        <p>For a 30 cm pizza, a useful starting point is approximately: Dough 250 g, Sauce 60–80 g, Cheese 80–100 g, Additional toppings usually 30–80 g depending on the topping, Olive oil 5–10 g.</p>
+<p>That's enough.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="42" fill="#D5F5E3" stroke="var(--ink)" stroke-width="6"/><path d="M40 62 L55 76 L82 45" fill="none" stroke="var(--ink)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-78">
+      <div class="step-num">N&deg;78</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The "less is more" principle</h3>
+        <p>Imagine the pizza as a balance between: dough + tomato + cheese + toppings.</p>
+<p>If one ingredient dominates, the pizza becomes unbalanced. For example: Too much sauce — wet. Too much cheese — heavy. Too much meat — greasy and salty. Too many vegetables — wet. Too much flour on the peel — bitter and dusty. Too much olive oil — greasy.</p>
+<p>The best pizzas often look surprisingly simple.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="42" fill="#D5F5E3" stroke="var(--ink)" stroke-width="6"/><path d="M40 62 L55 76 L82 45" fill="none" stroke="var(--ink)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-79">
+      <div class="step-num">N&deg;79</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>Ingredient quality matters</h3>
+        <p>You don't necessarily need expensive ingredients. But use good basics.</p>
+<p>Tomatoes: Look for canned tomatoes with good flavor and relatively simple ingredients.</p>
+<p>Olive oil: A flavorful extra-virgin olive oil is noticeable when used after baking.</p>
+<p>Mozzarella: Fresh, good-quality mozzarella makes a major difference.</p>
+<p>Flour: A flour suitable for pizza and long fermentation will make your life easier.</p>
+<p>Salt: Fine sea salt is perfect.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="60" r="42" fill="#D5F5E3" stroke="var(--ink)" stroke-width="6"/><path d="M40 62 L55 76 L82 45" fill="none" stroke="var(--ink)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-80">
+      <div class="step-num">N&deg;80</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The ultimate Margherita</h3>
+        <p>If I were making the pizza from this recipe for myself, I'd keep it extremely simple: Dough 250 g, Sauce 70 g good canned tomatoes, Cheese 90 g mozzarella, Basil 4 leaves, Oil 5 g excellent extra-virgin olive oil.</p>
+<p>Then: very hot oven, very hot steel, short bake, finish with basil and olive oil. That's enough.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><path d="M60 15 L71 45 L103 45 L77 63 L88 95 L60 76 L32 95 L43 63 L17 45 L49 45 Z" fill="var(--gold)" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-81">
+      <div class="step-num">N&deg;81</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>A complete timeline</h3>
+        <p>Day 1 — 14:00: Mix 390 g water, 1.5 g yeast, 600 g flour. Rest 20 minutes. Add 18 g salt, 10 g olive oil if desired. Knead/fold.</p>
+<p>15:00 — Begin bulk fermentation.</p>
+<p>16:30 — Divide into four pieces. Form four dough balls.</p>
+<p>17:00 — Cover and refrigerate.</p>
+<p>Day 2 — Leave refrigerated. Don't disturb them unnecessarily.</p>
+<p>Day 3 — approximately 15:00: Remove dough from refrigerator. Keep covered.</p>
+<p>17:00 — Begin preheating oven and pizza steel/stone. Maximum temperature.</p>
+<p>18:00 — Shape first pizza. Add sauce. Add cheese. Add toppings. Launch. Bake.</p>
+<p>18:10 — First pizza is ready. Eat.</p>
+<p>18:15 — Shape second pizza.</p>
+<p>18:25 — Bake second pizza. Continue.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><rect x="20" y="25" width="80" height="70" rx="6" fill="#FDF2E3" stroke="var(--ink)" stroke-width="6"/><line x1="20" y1="45" x2="100" y2="45" stroke="var(--ink)" stroke-width="5"/><line x1="38" y1="15" x2="38" y2="30" stroke="var(--ink)" stroke-width="5"/><line x1="82" y1="15" x2="82" y2="30" stroke="var(--ink)" stroke-width="5"/></svg></div>
+      </div>
+    </article>
+
+    <article class="step" id="step-82">
+      <div class="step-num">N&deg;82</div>
+      <div class="step-rail"><span class="step-dot"></span></div>
+      <div class="step-body">
+        <h3>The most important lessons</h3>
+        <p>If you remember only ten things from this entire recipe, remember these:</p>
+<p>1. Use a scale.</p>
+<p>2. Give the dough time.</p>
+<p>3. Don't use a rolling pin.</p>
+<p>4. Protect the outer rim.</p>
+<p>5. Don't overload toppings.</p>
+<p>6. Drain wet mozzarella.</p>
+<p>7. Preheat your stone or steel for a long time.</p>
+<p>8. Use the hottest oven setting available.</p>
+<p>9. Launch quickly after topping.</p>
+<p>10. Eat the pizza immediately.</p>
+<p>Final "Master Recipe" Card</p>
+<p>Dough (for 4 pizzas): 600 g strong flour, 390 g water, 18 g salt, 1.5 g instant yeast, 10 g olive oil (optional).</p>
+<p>Method: Mix water and yeast. Add flour. Mix until combined. Rest 15–20 minutes. Add salt. Add optional olive oil. Knead/fold until dough becomes smooth and elastic. Ferment 1–2 hours at room temperature. Divide into 4 × approximately 250 g. Form tight dough balls. Refrigerate 36–48 hours. Remove 2–4 hours before baking. Shape gently without rolling. Preserve the outer rim.</p>
+<p>Sauce: 400 g canned tomatoes, 1–2 g salt, olive oil, optional basil. Crush together. Don't cook.</p>
+<p>Topping per pizza: 60–80 g sauce, 80–100 g mozzarella, basil, olive oil, additional toppings as desired.</p>
+<p>Baking: Put stone/steel in oven. Preheat at maximum temperature for 45–60+ minutes. Stretch dough to 28–30 cm. Place on peel. Add sauce. Add cheese. Add toppings. Launch immediately. Bake approximately 4–7 minutes in a very hot home oven. Finish under broiler if necessary. Remove. Add fresh basil/olive oil. Rest briefly. Slice. Eat.</p>
+<p>And the single biggest secret...</p>
+<p>The best homemade pizza isn't produced by one magical ingredient.</p>
+<p>It's the combination of: good flour + correct hydration + enough fermentation + gentle shaping + restrained toppings + a genuinely hot cooking surface + fast baking.</p>
+<p>If you get those seven things right, you can make pizza at home that is dramatically better than most ordinary homemade pizza.</p>
+        <div class="step-icon"><svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true"><circle cx="60" cy="50" r="28" fill="#FDEBA8" stroke="var(--ink)" stroke-width="6"/><rect x="50" y="78" width="20" height="16" rx="3" fill="var(--ink)"/></svg></div>
+      </div>
+    </article>
+    </div>
+  </section>
+
+<footer class="footer">
+  <span class="quote-eyebrow">The single biggest secret</span>
+  <blockquote>Good flour + hydration + <span>time</span> + gentle hands + restraint + real heat + speed.</blockquote>
+  <p>Get those seven things right, and you can make pizza at home that's dramatically better than most ordinary homemade pizza.</p>
+  <div class="ticket">
+    <div class="tt">Master recipe — 4 pizzas</div>
+    <div><span>Strong flour</span><span>600 g</span></div>
+    <div><span>Water</span><span>390 g</span></div>
+    <div><span>Salt</span><span>18 g</span></div>
+    <div><span>Instant yeast</span><span>1.5 g</span></div>
+    <div><span>Olive oil</span><span>10 g</span></div>
+  </div>
+</footer>
+
+<script>
+const chips = document.querySelectorAll('.chip');
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.getElementById(chip.dataset.target).scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+const chapters = document.querySelectorAll('.chapter');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      chips.forEach(c => c.classList.toggle('active', c.dataset.target === e.target.id));
+    }
+  });
+}, {rootMargin:"-40% 0px -50% 0px", threshold:0});
+chapters.forEach(c => io.observe(c));
+</script>
+</body>
+</html>

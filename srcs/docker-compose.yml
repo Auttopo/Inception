@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - wp-data:/home/abenabde/data
+      - static-website:/home/abenabde/static_website
     ports:
       - "443:443"
       - "9000"
@@ -14,6 +15,7 @@ services:
       - net_front
       - net_nginx_adminer
     restart: unless-stopped
+    tty: true
 
   wordpress:
     build:
@@ -95,6 +97,13 @@ volumes:
       type: none
       o: bind
       device: /home/abenabde/data/db_data
+
+  static-website:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/abenabde/data/static_website
 
 networks:
   net_front:
