@@ -1,5 +1,15 @@
 
 services:
+  
+  game:
+    build:
+      context: bonus/game
+      dockerfile: Dockerfile
+    ports:
+      - "8042"
+    networks:
+      - net_game_stream
+    tty: true
 
   nginx:
     build:
@@ -14,6 +24,7 @@ services:
     networks:
       - net_front
       - net_nginx_adminer
+      - net_game_stream
     restart: unless-stopped
     tty: true
 
@@ -115,4 +126,6 @@ networks:
   net_nginx_adminer:
     driver: bridge
   net_adminer_db:
+    driver: bridge
+  net_game_stream:
     driver: bridge

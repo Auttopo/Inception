@@ -4,12 +4,13 @@ all: run
 run:
 	cd srcs ;\
 	sudo docker compose build ;\
-	sudo docker compose up -d
+	sudo docker compose up -d --remove-orphans
 
 install:
 	sudo ./docker_install.sh ;\
 	sudo echo "127.0.0.1 abenabde.42.fr www.abenabde.42.fr" >> /etc/hosts ;\
 	sudo echo "127.0.0.1 abenabde.pizza.fr www.abenabde.pizza.fr" >> /etc/hosts ;\
+	sudo echo "127.0.0.1 abenabde.game.fr www.abenabde.game.fr" >> /etc/hosts ;\
 	sudo mkdir -p /home/abenabde/data/wp_data ;\
 	sudo mkdir -p /home/abenabde/data/db_data ;\
 	sudo mkdir -p /home/abenabde/data/static_website ;\
@@ -33,13 +34,14 @@ status:
 	sudo docker ps
 
 clean:
+	sudo docker rm $$(sudo docker ps -aq) ;\
 	cd srcs ;\
-	sudo docker compose down -v
+	sudo docker compose down -v ;\
 	sudo docker builder prune -f
 
 fclean:
 	cd srcs ;\
-	sudo docker compose down -v --rmi all
+	sudo docker compose down -v --rmi all ;\
 	sudo docker builder prune -a -f
 	
 

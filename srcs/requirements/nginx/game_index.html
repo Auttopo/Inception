@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<img
+    id="game"
+    src="/stream"
+>
+
+<div id="error"></div>
+
+<script>
+const game = document.getElementById("game");
+const error = document.getElementById("error");
+
+game.onerror = function() {
+    game.style.display = "none";
+    error.textContent = "The game is already in use. Try later. :(";
+};
+</script>
+
+<script>
+const socket = new WebSocket(
+    "wss://" + window.location.host + "/inputs"
+);
+
+function sendSize() {
+    socket.send(JSON.stringify({
+        type: "resize",
+        width: Math.round(window.innerWidth * window.devicePixelRatio),
+        height: Math.round(window.innerHeight * window.devicePixelRatio)
+    }));
+}
+
+socket.onopen = function() {
+    sendSize();
+};
+
+socket.onmessage = function(event) {
+    console.log(event.data);
+};
+
+window.addEventListener("resize", sendSize);
+
+document.addEventListener("keydown", function(event) {
+    socket.send(JSON.stringify({
+        type: "keydown",
+        key: event.key
+    }));
+});
+
+document.addEventListener("mouseup", function(event) {
+    socket.send(JSON.stringify({
+        type: "mouseup",
+        button: event.button,
+        x: Math.round(event.clientX * window.devicePixelRatio),
+        y: Math.round(event.clientY * window.devicePixelRatio)
+    }));
+});
+</script>
+
+</body>
+</html>
