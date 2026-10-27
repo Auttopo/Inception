@@ -9,7 +9,6 @@ services:
       - "8042"
     networks:
       - net_game_stream
-    tty: true
 
   nginx:
     build:
@@ -26,7 +25,6 @@ services:
       - net_nginx_adminer
       - net_game_stream
     restart: unless-stopped
-    tty: true
 
   wordpress:
     build:
