@@ -10,5 +10,4 @@ ENV PATH=/root/.local/bin:$PATH
 RUN git clone https://github.com/Auttopo/Inspired-by-pacman-game.git game
 RUN cd game && make install && cd
 
-# ENTRYPOINT ["sleep", "infinity"]
 ENTRYPOINT ["sh", "-c", "cd game; git pull; make"]
