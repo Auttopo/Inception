@@ -63,7 +63,7 @@ services:
 
   redis:
     build:
-      context: requirements/redis
+      context: bonus/redis
       dockerfile: Dockerfile
     networks:
       - net_wp_cache
@@ -71,7 +71,7 @@ services:
 
   ftp:
     build:
-      context: requirements/ftp
+      context: bonus/ftp
       dockerfile: Dockerfile
     environment:
       FTP_USER: ${FTP_USER}
@@ -87,7 +87,7 @@ services:
 
   adminer:
     build:
-      context: requirements/adminer
+      context: bonus/adminer
       dockerfile: Dockerfile
     networks:
       - net_nginx_adminer
