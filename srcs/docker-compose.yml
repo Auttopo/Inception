@@ -9,6 +9,7 @@ services:
       - "8042"
     networks:
       - net_game_stream
+    restart: unless-stopped
 
   nginx:
     build:
@@ -93,9 +94,28 @@ services:
     restart: unless-stopped
 
 volumes:
+
   wp-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/abenabde/data/wp_data
+
   db-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/abenabde/data/db_data
+
   static-website:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/abenabde/data/static_website
+
 
 networks:
   net_front:

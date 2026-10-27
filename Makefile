@@ -24,7 +24,11 @@ install:
 	echo -n "FTP_USER=" >> srcs/.env ;\
 	echo "ftpuser" >> srcs/.env ;\
 	echo -n "FTP_PASSWORD=" >> srcs/.env ;\
-	openssl rand -hex 40 >> srcs/.env ;
+	openssl rand -hex 40 >> srcs/.env ;\
+\
+	sudo chmod 777 srcs/requirements/nginx/game_index.html ;\
+	sudo chmod 777 srcs/requirements/nginx/static-site.html ;\
+\
 
 stop:
 	cd srcs ;\
@@ -36,11 +40,13 @@ status:
 clean:
 	sudo docker rm $$(sudo docker ps -aq) ;\
 	cd srcs ;\
+	sudo docker compose stop ;\
 	sudo docker compose down -v ;\
 	sudo docker builder prune -f
 
 fclean:
 	cd srcs ;\
+	sudo docker compose stop ;\
 	sudo docker compose down -v --rmi all ;\
 	sudo docker builder prune -a -f
 	
