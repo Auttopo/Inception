@@ -188,91 +188,45 @@ Run `make run` and `make status` first to confirm all containers are `Up` before
 
 ---
 
-### 6.1 Nginx
+### 6.1 The websites are accessible and functional.
 
-**What to test:** TLS termination, virtual host routing, FastCGI proxy to WordPress, reverse proxy to Adminer.
-
-```bash
-# Test 1 — HTTPS connection to WordPress virtual host
-curl -k -o /dev/null -s -w "%{http_code}\n" https://abenabde.42.fr
-# Expected: 200 or 301
-
-# Test 2 — TLS version is strictly TLSv1.3
-curl -k --tls-max 1.2 https://abenabde.42.fr 2>&1 | grep -i "alert\|error\|version"
-# Expected: connection error (TLS 1.2 is rejected)
-
-# Test 3 — Static website virtual host
-curl -k -o /dev/null -s -w "%{http_code}\n" https://abenabde.pizza.fr
-# Expected: 200
-
-# Test 4 — Nginx configuration syntax is valid (inside container)
-sudo docker exec -it $(sudo docker ps -qf "name=nginx") nginx -t
-# Expected: syntax is ok / test is successful
-
-# Test 5 — Adminer is reachable through Nginx proxy
-curl -k -o /dev/null -s -w "%{http_code}\n" https://abenabde.42.fr/adminer
-# Expected: 200
-```
+| Site | URL |
+| Main website (WordPress) | [www.abenabde.42.fr](https://www.abenabde.42.fr) |
+| Adminer | [www.abenabde.42.fr/adminer](https://www.abenabde.42.fr/adminer)  |
+| Pizza website | [www.abenabde.pizza.fr](https://www.abenabde.pizza.fr) |
+| Game website | [www.abenabde.game.fr](https://www.abenabde.game.fr) |
 
 ---
 
-### 6.2 WordPress
+### 6.2 WordPress Usages
 
-**What to test:** PHP-FPM is running, WordPress config is generated, Redis extension is loaded.
+**What to test:** WordPress config is generated: PHP-FPM is running, Redis extension is loaded, MariaDB is functioning.
 
 ```bash
 # Test 1 — PHP-FPM process is running inside the container
 sudo docker exec -it $(sudo docker ps -qf "name=wordpress") ps aux | grep php-fpm
 # Expected: php-fpm8.2 processes listed
 
-# Test 2 — WordPress config file was auto-generated
-sudo docker exec -it $(sudo docker ps -qf "name=wordpress") \
-    ls /etc/wordpress/config-www.abenabde.42.fr.php
-# Expected: file path printed (no error)
-
-# Test 3 — PHP Redis extension is loaded
+# Test 2 — PHP Redis extension is loaded
 sudo docker exec -it $(sudo docker ps -qf "name=wordpress") \
     php -m | grep redis
 # Expected: redis
 
-# Test 4 — WordPress homepage returns HTTP 200 through the full stack
-curl -k -L -o /dev/null -s -w "%{http_code}\n" https://abenabde.42.fr
-# Expected: 200
-
-# Test 5 — object-cache.php drop-in is in place
-sudo docker exec -it $(sudo docker ps -qf "name=wordpress") \
-    ls /home/abenabde/data/wp-content/object-cache.php
-# Expected: file path printed
-```
-
----
-
-### 6.3 MariaDB
-
-**What to test:** Server is running, database and user exist, WordPress can connect.
-
-```bash
-# Test 1 — MariaDB process is running
+# Test 3 — MariaDB process is running
 sudo docker exec -it $(sudo docker ps -qf "name=mariadb") \
     mysqladmin -u root -p"$(grep DB_ROOT_PASSWORD srcs/.env | cut -d= -f2)" ping
 # Expected: mysqld is alive
 
-# Test 2 — WordPress database exists
+# Test 4 — WordPress database exists
 sudo docker exec -it $(sudo docker ps -qf "name=mariadb") \
     mysql -u root -p"$(grep DB_ROOT_PASSWORD srcs/.env | cut -d= -f2)" \
     -e "SHOW DATABASES;" | grep wordpressnetwork
 # Expected: wordpressnetwork
-
-# Test 3 — WordPress user can authenticate and access the database
-sudo docker exec -it $(sudo docker ps -qf "name=mariadb") \
-    mysql -u wordpressuser -p"$(grep WP_DB_PASSWORD srcs/.env | cut -d= -f2)" \
-    wordpressnetwork -e "SHOW TABLES;"
-# Expected: table list (wp_posts, wp_users, etc.) or empty set on fresh install
 ```
 
 ---
 
-### 6.4 Redis
+### 6.3 Redis
 
 **What to test:** Server is responsive, WordPress can connect via the Redis PHP extension.
 
@@ -289,7 +243,7 @@ sudo docker exec -it $(sudo docker ps -qf "name=redis") \
 # Test 3 — WordPress can connect to Redis over the internal network
 sudo docker exec -it $(sudo docker ps -qf "name=wordpress") \
     php -r '$r = new Redis(); $r->connect("redis", 6379); echo $r->ping() . "\n";'
-# Expected: +PONG
+# Expected: 1
 
 # Test 4 — Write and read a key (end-to-end cache test)
 sudo docker exec -it $(sudo docker ps -qf "name=redis") \
@@ -301,7 +255,7 @@ sudo docker exec -it $(sudo docker ps -qf "name=redis") \
 
 ---
 
-### 6.5 FTP
+### 6.4 FTP
 
 **What to test:** FTP server accepts authentication, can list files, upload works and is visible in the shared volume.
 
@@ -326,36 +280,4 @@ sudo docker exec -it $(sudo docker ps -qf "name=wordpress") \
 
 # Test 4 — Clean up the test file
 curl -u "$FTP_USER:$FTP_PASS" -Q "DELE ftp_test.txt" ftp://localhost:21/
-```
-
----
-
-### 6.6 Adminer
-
-**What to test:** Adminer container is running, internal reachability from Nginx, and access through the HTTPS proxy.
-
-```bash
-# Test 1 — Adminer process is running inside its container
-sudo docker exec -it $(sudo docker ps -qf "name=adminer") \
-    ps aux | grep php
-# Expected: php -S 0.0.0.0:8080 process listed
-
-# Test 2 — Adminer responds on its internal port (from the Nginx container)
-sudo docker exec -it $(sudo docker ps -qf "name=nginx") \
-    curl -s -o /dev/null -w "%{http_code}" http://adminer:8080
-# Expected: 200
-
-# Test 3 — Adminer is reachable via the Nginx HTTPS reverse proxy
-curl -k -o /dev/null -s -w "%{http_code}\n" https://abenabde.42.fr/adminer
-# Expected: 200
-
-# Test 4 — Browser validation
-# Open https://abenabde.42.fr/adminer in a browser.
-# Login with:
-#   System:   MySQL
-#   Server:   mariadb
-#   Username: wordpressuser  (WP_DB_USER in srcs/.env)
-#   Password: <WP_DB_PASSWORD from srcs/.env>
-#   Database: wordpressnetwork
-# Expected: Adminer dashboard showing WordPress tables.
 ```
