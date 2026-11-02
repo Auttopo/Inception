@@ -20,6 +20,10 @@ if [ ! -f /etc/wordpress/config-www.abenabde.42.fr.php ]; then \
 	define(\"WP_REDIS_HOST\", \"redis\"); \
 	define(\"WP_REDIS_PORT\", 6379); \
 	define(\"WP_CACHE\", true); \
+	define(\"WP_DEBUG\", true); \
+	define(\"WP_DEBUG_LOG\", \"/home/abenabde/data/wp-content/debug.log\"); \
+	define(\"WP_DEBUG_DISPLAY\", false); \
+	@ini_set(\"display_errors\", 0); \
 	" > /etc/wordpress/config-www.abenabde.42.fr.php; \
 	\
 	php -l /etc/wordpress/config-www.abenabde.42.fr.php; \

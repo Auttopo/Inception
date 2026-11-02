@@ -38,17 +38,19 @@ status:
 	sudo docker ps
 
 clean:
-	sudo docker rm $$(sudo docker ps -aq) ;\
 	cd srcs ;\
-	sudo docker compose stop ;\
 	sudo docker compose down -v ;\
-	sudo docker builder prune -f
+	sudo docker builder prune -f ;\
+	sudo docker rm $$(sudo docker ps -aq) ;\
+	sudo rm -rf /home/abenabde/data 
 
 fclean:
 	cd srcs ;\
 	sudo docker compose stop ;\
 	sudo docker compose down -v --rmi all ;\
-	sudo docker builder prune -a -f
+	sudo docker builder prune -a -f ;\
+	sudo docker rm $$(sudo docker ps -aq) ;\
+	sudo rm -rf /home/abenabde/data 
 	
 
 .PHONY: all run install stop status fclean

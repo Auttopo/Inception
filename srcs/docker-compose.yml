@@ -54,7 +54,7 @@ services:
       MYSQL_PASSWORD: ${WP_DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
-      - db-data:/home/abenabde/data
+      - db-data:/var/lib/mysql
     networks:
       - net_wp_db
       - net_adminer_db
